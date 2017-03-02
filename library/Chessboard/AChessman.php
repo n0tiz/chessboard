@@ -51,7 +51,7 @@ abstract class AChessman {
     }
 
     public function getEnemyColour() {
-        if ($this->colour === AChessman::COLOUR_WHITE) {
+        if ($this->isWhite()) {
             return AChessman::COLOUR_BLACK;
         }
         return AChessman::COLOUR_WHITE;
