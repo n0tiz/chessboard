@@ -17,8 +17,12 @@ class Queen extends AChessman implements IChessman {
         $this->icons[AChessman::COLOUR_BLACK] = "Q";
     }
 
-    public function move(array $to) {
+    public function move(array $chessmen, array $to) {
         ;
+    }
+
+    public function calculateAllowedMoves(array $chessmen) {
+        
     }
 
 }

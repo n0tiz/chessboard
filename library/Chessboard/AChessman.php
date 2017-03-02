@@ -64,9 +64,8 @@ abstract class AChessman {
     public function isBlack() {
         return ($this->colour === AChessman::COLOUR_BLACK);
     }
-    
-    public function isFirstMove()
-    {
+
+    public function isFirstMove() {
         return (count($this->previousLocations) === 0);
     }
 
