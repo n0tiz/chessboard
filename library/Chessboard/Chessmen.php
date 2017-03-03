@@ -12,5 +12,6 @@ use \Countable;
 class Chessmen implements Iterator, Countable, ArrayAccess {
 
     use TIterator;
-
+    use TCountable;
+    use TArrayAccess;
 }
