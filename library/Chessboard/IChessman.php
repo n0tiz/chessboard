@@ -5,7 +5,8 @@ namespace Chessboard;
 /**
  * @author patrick
  */
-interface IChessman {
+interface IChessman
+{
 
     public function move(array $chessmen, array $to);
 

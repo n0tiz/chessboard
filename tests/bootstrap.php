@@ -1,5 +1,4 @@
 <?php
-
 require_once '../library/Chessboard/Chessboard/Chessboard.php';
 require_once '../library/Chessboard/AChessman.php';
 require_once '../library/Chessboard/IChessman.php';

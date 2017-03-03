@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author patrick
  */
-abstract class AChessmanTest extends TestCase {
+abstract class AChessmanTest extends TestCase
+{
     
 }

@@ -5,10 +5,13 @@ namespace Chessboard;
 /**
  * @author patrick
  */
-trait TCountable {
+trait TCountable
+{
 
-    public function count() {
+    protected $array = array();
+
+    public function count()
+    {
         return count($this->array);
     }
-
 }

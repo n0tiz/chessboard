@@ -8,21 +8,24 @@ use \Chessboard\IChessman;
 /**
  * @author patrick
  */
-class Knight extends AChessman implements IChessman {
+class Knight extends AChessman implements IChessman
+{
 
-    public function __construct($colour, $currentLocation) {
+    public function __construct($colour, $currentLocation)
+    {
         parent::__construct($colour, $currentLocation);
         $this->valuation = 3;
         $this->icons[AChessman::COLOUR_WHITE] = "n";
         $this->icons[AChessman::COLOUR_BLACK] = "N";
     }
 
-    public function move(array $chessmen, array $to) {
+    public function move(array $chessmen, array $to)
+    {
         ;
     }
 
-    public function calculateAllowedMoves(array $chessmen) {
+    public function calculateAllowedMoves(array $chessmen)
+    {
         
     }
-
 }

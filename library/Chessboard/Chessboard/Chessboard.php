@@ -13,14 +13,16 @@ use Chessboard\Chessman\Pawn;
 /**
  * @author patrick
  */
-class Chessboard {
+class Chessboard
+{
 
     protected $board = array();
     public $files = array("a", "b", "c", "d", "e", "f", "g", "h");
     public $ranks = array("1", "2", "3", "4", "5", "6", "7", "8");
     public $chessmen = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->chessmen = array(
             new Rook(AChessman::COLOUR_BLACK, array("a", "8")),
             new Knight(AChessman::COLOUR_BLACK, array("b", "8")),
@@ -57,7 +59,8 @@ class Chessboard {
         );
     }
 
-    public function move(array $from, array $to) {
+    public function move(array $from, array $to)
+    {
         foreach ($this->chessmen as $chessman) {
             if ($chessman->getCurrentLocation() == $from) {
                 return $chessman->move($this->chessmen, $to);
@@ -66,12 +69,12 @@ class Chessboard {
         return false;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         $board = array();
         foreach ($this->chessmen as $chessman) {
             $board[$chessman->getFile()][$chessman->getRank()] = $chessman->getIcon();
         }
         return print_r($board, true);
     }
-
 }

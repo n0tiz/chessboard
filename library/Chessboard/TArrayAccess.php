@@ -5,24 +5,31 @@ namespace Chessboard;
 /**
  * @author patrick
  */
-trait TArrayAccess {
+trait TArrayAccess
+{
 
-    public function offsetExists($offset) {
+    protected $array = array();
+
+    public function offsetExists($offset)
+    {
         return (isset($this->array[$offset]));
     }
 
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         if ($this->offsetExists($offset)) {
             return $this->array[$offset];
         }
         return null;
     }
 
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value)
+    {
         $this->set($offset, $value);
     }
 
-    public function set($offset, $value) {
+    public function set($offset, $value)
+    {
         if (is_null($offset)) {
             array_push($this->array, $value);
         } else {
@@ -30,8 +37,8 @@ trait TArrayAccess {
         }
     }
 
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset)
+    {
         unset($this->array[$offset]);
     }
-
 }

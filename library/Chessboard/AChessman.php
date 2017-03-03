@@ -5,7 +5,8 @@ namespace Chessboard;
 /**
  * @author patrick
  */
-abstract class AChessman {
+abstract class AChessman
+{
 
     const COLOUR_WHITE = "white";
     const COLOUR_BLACK = "black";
@@ -21,52 +22,62 @@ abstract class AChessman {
     );
     protected $valuation = 0;
 
-    public function __construct($colour, $currentLocation) {
+    public function __construct($colour, $currentLocation)
+    {
         $this->colour = $colour;
         $this->currentLocation = $currentLocation;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getIcon();
     }
 
-    public function getIcon() {
+    public function getIcon()
+    {
         return $this->icons[$this->colour];
     }
 
-    public function getFile() {
+    public function getFile()
+    {
         return $this->currentLocation[0];
     }
 
-    public function getRank() {
+    public function getRank()
+    {
         return $this->currentLocation[1];
     }
 
-    public function getCurrentLocation() {
+    public function getCurrentLocation()
+    {
         return $this->currentLocation;
     }
 
-    public function getColour() {
+    public function getColour()
+    {
         return $this->colour;
     }
 
-    public function getEnemyColour() {
+    public function getEnemyColour()
+    {
         if ($this->isWhite()) {
             return AChessman::COLOUR_BLACK;
         }
         return AChessman::COLOUR_WHITE;
     }
 
-    public function isWhite() {
+    public function isWhite()
+    {
         return ($this->colour === AChessman::COLOUR_WHITE);
     }
 
-    public function isBlack() {
+    public function isBlack()
+    {
         return ($this->colour === AChessman::COLOUR_BLACK);
     }
 
-    public function isFirstMove() {
+    public function isFirstMove()
+    {
         return (count($this->previousLocations) === 0);
     }
-
 }

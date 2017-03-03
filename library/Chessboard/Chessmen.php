@@ -9,9 +9,12 @@ use \Countable;
 /**
  * @author patrick
  */
-class Chessmen implements Iterator, Countable, ArrayAccess {
+class Chessmen implements Iterator, Countable, ArrayAccess
+{
 
     use TIterator;
-    use TCountable;
-    use TArrayAccess;
+
+use TCountable;
+
+use TArrayAccess;
 }

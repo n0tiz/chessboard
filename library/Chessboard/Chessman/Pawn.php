@@ -8,16 +8,19 @@ use \Chessboard\IChessman;
 /**
  * @author patrick
  */
-class Pawn extends AChessman implements IChessman {
+class Pawn extends AChessman implements IChessman
+{
 
-    public function __construct($colour, $currentLocation) {
+    public function __construct($colour, $currentLocation)
+    {
         parent::__construct($colour, $currentLocation);
         $this->valuation = 3;
         $this->icons[AChessman::COLOUR_WHITE] = "p";
         $this->icons[AChessman::COLOUR_BLACK] = "P";
     }
 
-    public function calculateAllowedMoves(array $chessmen) {
+    public function calculateAllowedMoves(array $chessmen)
+    {
         $allowedMoves = array();
         // this is the default move of this pawn, one rank at a time
         array_push($allowedMoves, array($this->getFile(), (string) ($this->isWhite() ? $this->getRank() + 1 : $this->getRank() - 1)));
@@ -50,7 +53,8 @@ class Pawn extends AChessman implements IChessman {
         return $allowedMoves;
     }
 
-    public function move(array $chessmen, array $to) {
+    public function move(array $chessmen, array $to)
+    {
         $allowedMoves = $this->calculateAllowedMoves($chessmen);
         // if the move is allowed
         if (in_array($to, $allowedMoves)) {
@@ -62,5 +66,4 @@ class Pawn extends AChessman implements IChessman {
         }
         return false;
     }
-
 }

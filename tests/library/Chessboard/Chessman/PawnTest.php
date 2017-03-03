@@ -7,54 +7,65 @@ use tests\Chessboard\AChessmanTest;
 /**
  * @author patrick
  */
-class PawnTest extends AChessmanTest {
+class PawnTest extends AChessmanTest
+{
 
-    public function testGetIconWhite() {
+    public function testGetIconWhite()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame("p", $object->getIcon());
     }
 
-    public function testToStringWhite() {
+    public function testToStringWhite()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame("p", (string) $object);
     }
 
-    public function testGetEnemyColourWhite() {
+    public function testGetEnemyColourWhite()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame(\Chessboard\AChessman::COLOUR_BLACK, $object->getEnemyColour());
     }
 
-    public function testGetIconBlack() {
+    public function testGetIconBlack()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
         $this->assertSame("P", $object->getIcon());
     }
 
-    public function testToStringBlack() {
+    public function testToStringBlack()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
         $this->assertSame("P", (string) $object);
     }
 
-    public function testGetEnemyColourBlack() {
+    public function testGetEnemyColourBlack()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
         $this->assertSame(\Chessboard\AChessman::COLOUR_WHITE, $object->getEnemyColour());
     }
 
-    public function testGetFile() {
+    public function testGetFile()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame("a", $object->getFile());
     }
 
-    public function testGetRank() {
+    public function testGetRank()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame("1", $object->getRank());
     }
 
-    public function testGetCurrentLocation() {
+    public function testGetCurrentLocation()
+    {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
         $this->assertSame(array("a", "1"), $object->getCurrentLocation());
     }
 
-    public function testCalculateAllowedMovesFirstMove() {
+    public function testCalculateAllowedMovesFirstMove()
+    {
         $chessmen = array();
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $expectedResult = array(
@@ -64,7 +75,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMove() {
+    public function testCalculateAllowedMovesSecondMove()
+    {
         $chessmen = array();
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $object->move($chessmen, array("a", "3"));
@@ -74,7 +86,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMove() {
+    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMove()
+    {
         $chessmen = array();
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $object->move($chessmen, array("a", "4"));
@@ -84,7 +97,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesFirstMoveOneEnemyNearby() {
+    public function testCalculateAllowedMovesFirstMoveOneEnemyNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "3"))
         );
@@ -97,7 +111,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMoveOneEnemyNearby() {
+    public function testCalculateAllowedMovesSecondMoveOneEnemyNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "4"))
         );
@@ -110,7 +125,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMoveOneEnemyNearby() {
+    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMoveOneEnemyNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "5"))
         );
@@ -123,7 +139,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesFirstMoveTwoEnemiesNearby() {
+    public function testCalculateAllowedMovesFirstMoveTwoEnemiesNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("c", "3")),
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "3"))
@@ -138,7 +155,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMoveTwoEnemiesNearby() {
+    public function testCalculateAllowedMovesSecondMoveTwoEnemiesNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("c", "4")),
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "4"))
@@ -153,7 +171,8 @@ class PawnTest extends AChessmanTest {
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
 
-    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMoveTwoEnemiesNearby() {
+    public function testCalculateAllowedMovesSecondMoveTwoStepsAsFirstMoveTwoEnemiesNearby()
+    {
         $chessmen = array(
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("c", "5")),
             new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "5"))
@@ -167,5 +186,4 @@ class PawnTest extends AChessmanTest {
         );
         $this->assertSame($expectedResult, $object->calculateAllowedMoves($chessmen));
     }
-
 }
