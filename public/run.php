@@ -1,5 +1,5 @@
 <?php
-require_once '../library/Chessboard/Chessboard/Chessboard.php';
+require_once '../library/Chessboard/Board.php';
 require_once '../library/Chessboard/AChessman.php';
 require_once '../library/Chessboard/IChessman.php';
 require_once '../library/Chessboard/TIterator.php';
@@ -13,7 +13,8 @@ require_once '../library/Chessboard/Chessman/Pawn.php';
 require_once '../library/Chessboard/Chessman/Queen.php';
 require_once '../library/Chessboard/Chessman/Rook.php';
 
-$chessboard = new \Chessboard\Chessboard\Chessboard();
+$chessboard = new \Chessboard\Board();
 var_dump($chessboard->move(array("a", "2"), array("a", "4")));
 var_dump($chessboard->move(array("a", "7"), array("a", "6")));
+var_dump($chessboard->move(array("b", "2"), array("c", "3")));
 echo $chessboard;

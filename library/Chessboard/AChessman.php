@@ -35,7 +35,7 @@ abstract class AChessman
 
     public function getIcon()
     {
-        return $this->icons[$this->colour];
+        return $this->icons[$this->getColour()];
     }
 
     public function getFile()
@@ -58,26 +58,23 @@ abstract class AChessman
         return $this->colour;
     }
 
-    public function getEnemyColour()
-    {
-        if ($this->isWhite()) {
-            return AChessman::COLOUR_BLACK;
-        }
-        return AChessman::COLOUR_WHITE;
-    }
-
     public function isWhite()
     {
-        return ($this->colour === AChessman::COLOUR_WHITE);
+        return ($this->getColour() === AChessman::COLOUR_WHITE);
     }
 
     public function isBlack()
     {
-        return ($this->colour === AChessman::COLOUR_BLACK);
+        return ($this->getColour() === AChessman::COLOUR_BLACK);
     }
 
     public function isFirstMove()
     {
-        return (count($this->previousLocations) === 0);
+        return (count($this->getPreviousLocations()) === 0);
+    }
+
+    public function getPreviousLocations()
+    {
+        return $this->previousLocations;
     }
 }

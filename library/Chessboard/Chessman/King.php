@@ -19,13 +19,18 @@ class King extends AChessman implements IChessman
         $this->icons[AChessman::COLOUR_BLACK] = "K";
     }
 
-    public function move(array $chessmen, array $to)
+    public function getPossibleMoves()
     {
         ;
     }
 
-    public function calculateAllowedMoves(array $chessmen)
+    public function getPossibleAttackMoves()
     {
-        
+        ;
+    }
+
+    public function move(array $to)
+    {
+        ;
     }
 }

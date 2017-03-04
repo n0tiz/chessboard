@@ -8,7 +8,9 @@ namespace Chessboard;
 interface IChessman
 {
 
-    public function move(array $chessmen, array $to);
+    public function move(array $to);
 
-    public function calculateAllowedMoves(array $chessmen);
+    public function getPossibleMoves();
+
+    public function getPossibleAttackMoves();
 }
