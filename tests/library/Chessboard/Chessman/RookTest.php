@@ -67,13 +67,13 @@ class RookTest extends AChessmanTest
             array("f", "5"),
             array("g", "5"),
             array("h", "5"),
-            array("e", "6"),
-            array("e", "7"),
-            array("e", "8"),
             array("e", "4"),
             array("e", "3"),
             array("e", "2"),
             array("e", "1"),
+            array("e", "6"),
+            array("e", "7"),
+            array("e", "8"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
@@ -111,13 +111,13 @@ class RookTest extends AChessmanTest
             array("f", "5"),
             array("g", "5"),
             array("h", "5"),
-            array("d", "6"),
-            array("d", "7"),
-            array("d", "8"),
             array("d", "4"),
             array("d", "3"),
             array("d", "2"),
             array("d", "1"),
+            array("d", "6"),
+            array("d", "7"),
+            array("d", "8"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
@@ -146,8 +146,7 @@ class RookTest extends AChessmanTest
 
     public function testGetPossibleAttackMoves2()
     {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
-        $object->move(array("e", "5"));
+        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("e", "5"));
         $expectedResult = array(
             array("d", "5"),
             array("c", "5"),
@@ -156,21 +155,20 @@ class RookTest extends AChessmanTest
             array("f", "5"),
             array("g", "5"),
             array("h", "5"),
-            array("e", "6"),
-            array("e", "7"),
-            array("e", "8"),
             array("e", "4"),
             array("e", "3"),
             array("e", "2"),
             array("e", "1"),
+            array("e", "6"),
+            array("e", "7"),
+            array("e", "8"),
         );
         $this->assertSame($expectedResult, $object->getPossibleAttackMoves());
     }
 
     public function testGetPossibleAttackMoves3()
     {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
-        $object->move(array("d", "1"));
+        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("d", "1"));
         $expectedResult = array(
             array("c", "1"),
             array("b", "1"),
@@ -201,13 +199,13 @@ class RookTest extends AChessmanTest
             array("f", "5"),
             array("g", "5"),
             array("h", "5"),
-            array("d", "6"),
-            array("d", "7"),
-            array("d", "8"),
             array("d", "4"),
             array("d", "3"),
             array("d", "2"),
             array("d", "1"),
+            array("d", "6"),
+            array("d", "7"),
+            array("d", "8"),
         );
         $this->assertSame($expectedResult, $object->getPossibleAttackMoves());
     }

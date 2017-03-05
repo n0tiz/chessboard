@@ -22,7 +22,28 @@ class Bishop extends AChessman implements IChessman
     public function getPossibleMoves()
     {
         // move diagonally
-        ;
+        $possibleMoves = array();
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) + $x, $this->files) && array_key_exists(array_search($this->getRank(), $this->ranks) + $x, $this->ranks); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) + $x;
+            $rKey = array_search($this->getRank(), $this->ranks) + $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], (string) $this->ranks[$rKey]));
+        }
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) - $x, $this->files) && array_key_exists(array_search($this->getRank(), $this->ranks) + $x, $this->ranks); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) - $x;
+            $rKey = array_search($this->getRank(), $this->ranks) + $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], (string) $this->ranks[$rKey]));
+        }
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) - $x, $this->files) && array_key_exists(array_search($this->getRank(), $this->ranks) - $x, $this->ranks); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) - $x;
+            $rKey = array_search($this->getRank(), $this->ranks) - $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], (string) $this->ranks[$rKey]));
+        }
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) + $x, $this->files) && array_key_exists(array_search($this->getRank(), $this->ranks) - $x, $this->ranks); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) + $x;
+            $rKey = array_search($this->getRank(), $this->ranks) - $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], (string) $this->ranks[$rKey]));
+        }
+        return $possibleMoves;
     }
 
     public function getPossibleAttackMoves()
