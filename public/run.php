@@ -14,6 +14,7 @@ require_once '../library/Chessboard/Chessman/Queen.php';
 require_once '../library/Chessboard/Chessman/Rook.php';
 
 $chessboard = new \Chessboard\Board();
+var_dump($chessboard->move(array("a", "8"), array("a", "5")));
 var_dump($chessboard->move(array("a", "2"), array("a", "4")));
 var_dump($chessboard->move(array("a", "7"), array("a", "6")));
 var_dump($chessboard->move(array("b", "2"), array("c", "3")));

@@ -34,7 +34,7 @@ class KingTest extends AChessmanTest
         $this->assertSame("K", (string) $object);
     }
 
-    public function testGetPossibleMovesOutOfBoundaries()
+    public function testGetPossibleMoves1()
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
         $expectedResult = array(
@@ -47,10 +47,9 @@ class KingTest extends AChessmanTest
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
 
-    public function testGetPossibleMoves()
+    public function testGetPossibleMoves2()
     {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
-        $object->move(array("e", "2"));
+        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "2"));
         $expectedResult = array(
             array("e", "3"),
             array("e", "1"),
@@ -64,7 +63,7 @@ class KingTest extends AChessmanTest
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
 
-    public function testGetPossibleAttackMovesOutOfBoundaries()
+    public function testGetPossibleAttackMoves1()
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
         $expectedResult = array(
@@ -77,10 +76,9 @@ class KingTest extends AChessmanTest
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
 
-    public function testGetPossibleAttackMoves()
+    public function testGetPossibleAttackMoves2()
     {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
-        $object->move(array("e", "2"));
+        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "2"));
         $expectedResult = array(
             array("e", "3"),
             array("e", "1"),

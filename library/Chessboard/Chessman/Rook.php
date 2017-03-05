@@ -22,7 +22,26 @@ class Rook extends AChessman implements IChessman
     public function getPossibleMoves()
     {
         // move horizontal, vertical
-        ;
+        $possibleMoves = array();
+        // horizontal, rank stays the same
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) - $x, $this->files); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) - $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], $this->getRank()));
+        }
+        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) + $x, $this->files); $x ++) {
+            $fKey = array_search($this->getFile(), $this->files) + $x;
+            array_push($possibleMoves, array((string) $this->files[$fKey], $this->getRank()));
+        }
+        // vertical, file stays the same
+        for ($x = 1; array_key_exists(array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? $x : -$x), $this->ranks); $x ++) {
+            $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? $x : -$x);
+            array_push($possibleMoves, array($this->getFile(), (string) $this->ranks[$rKey]));
+        }
+        for ($x = 1; array_key_exists(array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? -$x : $x), $this->ranks); $x ++) {
+            $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? -$x : $x);
+            array_push($possibleMoves, array($this->getFile(), (string) $this->ranks[$rKey]));
+        }
+        return $possibleMoves;
     }
 
     public function getPossibleAttackMoves()
