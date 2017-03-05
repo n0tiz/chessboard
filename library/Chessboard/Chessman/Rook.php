@@ -21,16 +21,12 @@ class Rook extends AChessman implements IChessman
 
     public function getPossibleMoves()
     {
+        // move horizontal, vertical
         ;
     }
 
     public function getPossibleAttackMoves()
     {
-        ;
-    }
-
-    public function move(array $to)
-    {
-        ;
+        return $this->getPossibleMoves();
     }
 }

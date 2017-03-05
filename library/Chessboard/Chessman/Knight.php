@@ -21,16 +21,12 @@ class Knight extends AChessman implements IChessman
 
     public function getPossibleMoves()
     {
+        // move in L
         ;
     }
 
     public function getPossibleAttackMoves()
     {
-        ;
-    }
-
-    public function move(array $to)
-    {
-        ;
+        return $this->getPossibleMoves();
     }
 }

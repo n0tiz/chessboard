@@ -56,13 +56,4 @@ class Pawn extends AChessman implements IChessman
         }
         return $possibleAttackMoves;
     }
-
-    public function move(array $to)
-    {
-        // keep a history of moves of this chessman
-        array_push($this->previousLocations, $this->currentLocation);
-        // change the current location of this chessman
-        $this->currentLocation = $to;
-        return true;
-    }
 }

@@ -21,16 +21,12 @@ class Bishop extends AChessman implements IChessman
 
     public function getPossibleMoves()
     {
+        // move diagonally
         ;
     }
 
     public function getPossibleAttackMoves()
     {
-        ;
-    }
-
-    public function move(array $to)
-    {
-        ;
+        return $this->getPossibleMoves();
     }
 }

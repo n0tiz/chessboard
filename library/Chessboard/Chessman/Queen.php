@@ -21,16 +21,13 @@ class Queen extends AChessman implements IChessman
 
     public function getPossibleMoves()
     {
+        // move diagonally
+        // move horizontal, vertical
         ;
     }
 
     public function getPossibleAttackMoves()
     {
-        ;
-    }
-
-    public function move(array $to)
-    {
-        ;
+        return $this->getPossibleMoves();
     }
 }
