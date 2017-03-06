@@ -23,13 +23,11 @@ class Queen extends AChessman implements IChessman
 
     public function getPossibleMoves()
     {
-        $possibleMoves = array();
         // move diagonally, like a bishop
         $bishop = new Bishop($this->getColour(), $this->getCurrentLocation());
-        array_merge($possibleMoves, $bishop->getPossibleMoves());
         // move horizontal, vertical, like a rook
         $rook = new Rook($this->getColour(), $this->getCurrentLocation());
-        array_merge($possibleMoves, $rook->getPossibleMoves());
+        $possibleMoves = array_merge($bishop->getPossibleMoves(), $rook->getPossibleMoves());
         return $possibleMoves;
     }
 
