@@ -19,6 +19,11 @@ class Pawn extends AChessman implements IChessman
         $this->icons[AChessman::COLOUR_BLACK] = "P";
     }
 
+    public function getPossiblePaths()
+    {
+        
+    }
+
     public function getPossibleMoves()
     {
         $possibleMoves = array();

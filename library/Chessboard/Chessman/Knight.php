@@ -19,14 +19,8 @@ class Knight extends AChessman implements IChessman
         $this->icons[AChessman::COLOUR_BLACK] = "N";
     }
 
-    public function getPossibleMoves()
+    public function getPossiblePaths()
     {
-        // move in L
         ;
-    }
-
-    public function getPossibleAttackMoves()
-    {
-        return $this->getPossibleMoves();
     }
 }

@@ -27,7 +27,14 @@ class Chessmen implements Iterator, Countable, ArrayAccess
         $possibleMoves = $chessman->getPossibleMoves();
         // if the wanted move is in the possible moves, we will start looking for collisions
         if (in_array($to, $possibleMoves)) {
-            // @todo: look for collisions
+            $path = $chessman->getPath($from, $to);
+            // check for collisions in path to destination location
+            foreach (array_slice($path, 1, count($path) - 2) as $location) {
+                list(, $enemyChessman) = $this->find($location);
+            }
+            if (false !== $chessman) {
+                throw new Exception("Chessman is having a colision when moving");
+            }
             // no collision found, so move the chessman
             return $chessman->move($to);
         }

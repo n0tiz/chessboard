@@ -38,11 +38,11 @@ class KingTest extends AChessmanTest
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
         $expectedResult = array(
-            array("e", "2"),
+            array("f", "2"),
+            array("d", "2"),
             array("d", "1"),
             array("f", "1"),
-            array("d", "2"),
-            array("f", "2"),
+            array("e", "2"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
@@ -51,14 +51,14 @@ class KingTest extends AChessmanTest
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "2"));
         $expectedResult = array(
-            array("e", "3"),
-            array("e", "1"),
-            array("d", "2"),
-            array("f", "2"),
-            array("d", "3"),
             array("f", "3"),
+            array("d", "3"),
             array("d", "1"),
             array("f", "1"),
+            array("d", "2"),
+            array("f", "2"),
+            array("e", "1"),
+            array("e", "3"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
@@ -67,11 +67,11 @@ class KingTest extends AChessmanTest
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));
         $expectedResult = array(
-            array("e", "2"),
+            array("f", "2"),
+            array("d", "2"),
             array("d", "1"),
             array("f", "1"),
-            array("d", "2"),
-            array("f", "2"),
+            array("e", "2"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
@@ -80,14 +80,14 @@ class KingTest extends AChessmanTest
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "2"));
         $expectedResult = array(
-            array("e", "3"),
-            array("e", "1"),
-            array("d", "2"),
-            array("f", "2"),
-            array("d", "3"),
             array("f", "3"),
+            array("d", "3"),
             array("d", "1"),
             array("f", "1"),
+            array("d", "2"),
+            array("f", "2"),
+            array("e", "1"),
+            array("e", "3"),
         );
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }

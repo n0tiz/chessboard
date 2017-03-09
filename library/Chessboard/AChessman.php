@@ -86,4 +86,31 @@ abstract class AChessman
         $this->currentLocation = $to;
         return true;
     }
+
+    public function getPossibleMoves()
+    {
+        $possibleMoves = array();
+        foreach ($this->getPossiblePaths() as $possiblePath) {
+            array_shift($possiblePath);
+            $possibleMoves = array_merge($possibleMoves, $possiblePath);
+        }
+        return $possibleMoves;
+    }
+
+    public function getPossibleAttackMoves()
+    {
+        return $this->getPossibleMoves();
+    }
+
+    public function getPath(array $from, array $to)
+    {
+        foreach ($this->getPossiblePaths() as $possiblePath) {
+            if (in_array($from, $possiblePath) && in_array($to, $possiblePath)) {
+                $sKey = array_search($from, $possiblePath);
+                $eKey = array_search($to, $possiblePath) + 1;
+                return array_slice($possiblePath, $sKey, $eKey);
+            }
+        }
+        return false;
+    }
 }

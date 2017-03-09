@@ -21,18 +21,13 @@ class Queen extends AChessman implements IChessman
         $this->icons[AChessman::COLOUR_BLACK] = "Q";
     }
 
-    public function getPossibleMoves()
+    public function getPossiblePaths()
     {
         // move diagonally, like a bishop
         $bishop = new Bishop($this->getColour(), $this->getCurrentLocation());
         // move horizontal, vertical, like a rook
         $rook = new Rook($this->getColour(), $this->getCurrentLocation());
-        $possibleMoves = array_merge($bishop->getPossibleMoves(), $rook->getPossibleMoves());
-        return $possibleMoves;
-    }
-
-    public function getPossibleAttackMoves()
-    {
-        return $this->getPossibleMoves();
+        $possiblePaths = array_merge($bishop->getPossiblePaths(), $rook->getPossiblePaths());
+        return $possiblePaths;
     }
 }
