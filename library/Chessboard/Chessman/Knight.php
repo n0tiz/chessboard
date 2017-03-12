@@ -3,12 +3,11 @@
 namespace Chessboard\Chessman;
 
 use \Chessboard\AChessman;
-use \Chessboard\IChessman;
 
 /**
  * @author patrick
  */
-class Knight extends AChessman implements IChessman
+class Knight extends AChessman
 {
 
     public function __construct($colour, $currentLocation)

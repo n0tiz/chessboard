@@ -2,10 +2,12 @@
 
 namespace Chessboard;
 
+use Chessboard\IChessman;
+
 /**
  * @author patrick
  */
-abstract class AChessman
+abstract class AChessman implements IChessman
 {
 
     const COLOUR_WHITE = "white";

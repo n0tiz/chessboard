@@ -3,13 +3,12 @@
 namespace Chessboard\Chessman;
 
 use \Chessboard\AChessman;
-use \Chessboard\IChessman;
 use \Chessboard\Chessman\Queen;
 
 /**
  * @author patrick
  */
-class King extends AChessman implements IChessman
+class King extends AChessman
 {
 
     public function __construct($colour, $currentLocation)
@@ -24,8 +23,9 @@ class King extends AChessman implements IChessman
     {
         // king can move the same as a queen, but only one step at a time
         $queen = new Queen($this->getColour(), $this->getCurrentLocation());
-        foreach ($queen->getPossiblePaths() as $key => $possiblePath) {
-            $possiblePaths[$key] = array_slice($possiblePath, 0, 2);
+        $possiblePaths = array();
+        foreach ($queen->getPossiblePaths() as $possiblePath) {
+            array_push($possiblePaths, array_slice($possiblePath, 0, 2));
         }
         return $possiblePaths;
     }

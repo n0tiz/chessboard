@@ -3,12 +3,11 @@
 namespace Chessboard\Chessman;
 
 use \Chessboard\AChessman;
-use \Chessboard\IChessman;
 
 /**
  * @author patrick
  */
-class Rook extends AChessman implements IChessman
+class Rook extends AChessman
 {
 
     public function __construct($colour, $currentLocation)
@@ -22,26 +21,24 @@ class Rook extends AChessman implements IChessman
     public function getPossiblePaths()
     {
         $possiblePaths = array();
-        $possiblePaths[0] = array($this->getCurrentLocation());
-        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) - $x, $this->files); $x ++) {
-            $fKey = array_search($this->getFile(), $this->files) - $x;
-            array_push($possiblePaths[0], array((string) $this->files[$fKey], $this->getRank()));
+        $horizontalPath = array();
+        foreach ($this->files as $file) {
+            array_push($horizontalPath, array($file, $this->getRank()));
+            if ($file == $this->getFile() && count($horizontalPath) > 1) {
+                array_push($possiblePaths, array_reverse($horizontalPath));
+                $horizontalPath = array($this->getCurrentLocation());
+            }
         }
-        $possiblePaths[1] = array($this->getCurrentLocation());
-        for ($x = 1; array_key_exists(array_search($this->getFile(), $this->files) + $x, $this->files); $x ++) {
-            $fKey = array_search($this->getFile(), $this->files) + $x;
-            array_push($possiblePaths[1], array((string) $this->files[$fKey], $this->getRank()));
+        array_push($possiblePaths, $horizontalPath);
+        $verticalPath = array();
+        foreach ($this->ranks as $rank) {
+            array_push($verticalPath, array($this->getFile(), $rank));
+            if ($rank == $this->getRank() && count($verticalPath) > 1) {
+                array_push($possiblePaths, array_reverse($verticalPath));
+                $verticalPath = array($this->getCurrentLocation());
+            }
         }
-        $possiblePaths[2] = array($this->getCurrentLocation());
-        for ($x = 1; array_key_exists(array_search($this->getRank(), $this->ranks) - $x, $this->ranks); $x ++) {
-            $rKey = array_search($this->getRank(), $this->ranks) - $x;
-            array_push($possiblePaths[2], array($this->getFile(), (string) $this->ranks[$rKey]));
-        }
-        $possiblePaths[3] = array($this->getCurrentLocation());
-        for ($x = 1; array_key_exists(array_search($this->getRank(), $this->ranks) + $x, $this->ranks); $x ++) {
-            $rKey = array_search($this->getRank(), $this->ranks) + $x;
-            array_push($possiblePaths[3], array($this->getFile(), (string) $this->ranks[$rKey]));
-        }
+        array_push($possiblePaths, $verticalPath);
         return $possiblePaths;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 require_once '../library/Chessboard/Board.php';
-require_once '../library/Chessboard/AChessman.php';
 require_once '../library/Chessboard/IChessman.php';
+require_once '../library/Chessboard/AChessman.php';
 require_once '../library/Chessboard/TIterator.php';
 require_once '../library/Chessboard/TArrayAccess.php';
 require_once '../library/Chessboard/TCountable.php';

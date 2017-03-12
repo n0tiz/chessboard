@@ -3,14 +3,13 @@
 namespace Chessboard\Chessman;
 
 use \Chessboard\AChessman;
-use \Chessboard\IChessman;
 use \Chessboard\Chessman\Rook;
 use \Chessboard\Chessman\Bishop;
 
 /**
  * @author patrick
  */
-class Queen extends AChessman implements IChessman
+class Queen extends AChessman
 {
 
     public function __construct($colour, $currentLocation)
@@ -23,9 +22,8 @@ class Queen extends AChessman implements IChessman
 
     public function getPossiblePaths()
     {
-        // move diagonally, like a bishop
+        // queen can do all moves a bishop can, and all moves a rook can
         $bishop = new Bishop($this->getColour(), $this->getCurrentLocation());
-        // move horizontal, vertical, like a rook
         $rook = new Rook($this->getColour(), $this->getCurrentLocation());
         $possiblePaths = array_merge($bishop->getPossiblePaths(), $rook->getPossiblePaths());
         return $possiblePaths;
