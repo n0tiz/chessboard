@@ -20,22 +20,22 @@ class Bishop extends AChessman
 
     public function getPossiblePaths()
     {
-        for ($rKey = array_search($this->getRank(), $this->ranks), $fKey = array_search($this->getFile(), $this->files); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $rKey ++, $fKey ++) {
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey ++, $rKey ++) {
             $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }
         $possiblePaths[] = $possiblePath;
         unset($possiblePath);
-        for ($rKey = array_search($this->getRank(), $this->ranks), $fKey = array_search($this->getFile(), $this->files); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $rKey ++, $fKey --) {
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey --, $rKey ++) {
             $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }
         $possiblePaths[] = $possiblePath;
         unset($possiblePath);
-        for ($rKey = array_search($this->getRank(), $this->ranks), $fKey = array_search($this->getFile(), $this->files); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $rKey --, $fKey --) {
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey --, $rKey --) {
             $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }
         $possiblePaths[] = $possiblePath;
         unset($possiblePath);
-        for ($rKey = array_search($this->getRank(), $this->ranks), $fKey = array_search($this->getFile(), $this->files); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $rKey --, $fKey ++) {
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey ++, $rKey --) {
             $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }
         $possiblePaths[] = $possiblePath;
