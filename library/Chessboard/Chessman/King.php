@@ -23,9 +23,8 @@ class King extends AChessman
     {
         // king can move the same as a queen, but only one step at a time
         $queen = new Queen($this->getColour(), $this->getCurrentLocation());
-        $possiblePaths = array();
         foreach ($queen->getPossiblePaths() as $possiblePath) {
-            array_push($possiblePaths, array_slice($possiblePath, 0, 2));
+            $possiblePaths[] = array_slice($possiblePath, 0, 2);
         }
         return $possiblePaths;
     }
