@@ -20,25 +20,24 @@ class Rook extends AChessman
 
     public function getPossiblePaths()
     {
-        $possiblePaths = array();
-        $horizontalPath = array();
         foreach ($this->files as $file) {
-            array_push($horizontalPath, array($file, $this->getRank()));
+            $horizontalPath[] = array($file, $this->getRank());
             if ($file == $this->getFile() && count($horizontalPath) > 1) {
-                array_push($possiblePaths, array_reverse($horizontalPath));
-                $horizontalPath = array($this->getCurrentLocation());
+                $possiblePaths[] = array_reverse($horizontalPath);
+                unset($horizontalPath);
+                $horizontalPath[] = $this->getCurrentLocation();
             }
         }
-        array_push($possiblePaths, $horizontalPath);
-        $verticalPath = array();
+        $possiblePaths[] = $horizontalPath;
         foreach ($this->ranks as $rank) {
-            array_push($verticalPath, array($this->getFile(), $rank));
+            $verticalPath[] = array($this->getFile(), $rank);
             if ($rank == $this->getRank() && count($verticalPath) > 1) {
-                array_push($possiblePaths, array_reverse($verticalPath));
-                $verticalPath = array($this->getCurrentLocation());
+                $possiblePaths[] = array_reverse($verticalPath);
+                unset($verticalPath);
+                $verticalPath[] = $this->getCurrentLocation();
             }
         }
-        array_push($possiblePaths, $verticalPath);
+        $possiblePaths[] = $verticalPath;
         return $possiblePaths;
     }
 }
