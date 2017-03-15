@@ -98,4 +98,104 @@ class PawnTest extends AChessmanTest
         );
         $this->assertSame($expectedResult, $object->getPossibleAttackMoves());
     }
+
+    public function testGetPossiblePathsFirstMove()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
+        $expectedResult = array(
+            array(
+                array("a", "3"),
+                array("a", "4"),
+            ),
+            array(
+                array("b", "3"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePathsSecondMove1()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
+        $object->move(array("a", "3"));
+        $expectedResult = array(
+            array(
+                array("a", "4"),
+            ),
+            array(
+                array("b", "4"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePathsSecondMove2()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
+        $object->move(array("a", "4"));
+        $expectedResult = array(
+            array(
+                array("a", "5"),
+            ),
+            array(
+                array("b", "5"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePathsOutOfBoundaries()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "8"));
+        $expectedResult = array(array());
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePaths()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2"));
+        $expectedResult = array(
+            array(
+                array("b", "3"),
+                array("b", "4"),
+            ),
+            array(
+                array("a", "3"),
+            ),
+            array(
+                array("c", "3"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePathsOutOfBoundariesLeft()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
+        $expectedResult = array(
+            array(
+                array("a", "3"),
+                array("a", "4"),
+            ),
+            array(
+                array("b", "3"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
+
+    public function testGetPossiblePathsOutOfBoundariesRight()
+    {
+        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
+        $expectedResult = array(
+            array(
+                array("h", "3"),
+                array("h", "4"),
+            ),
+            array(
+                array("g", "3"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getPossiblePaths());
+    }
 }
