@@ -18,6 +18,10 @@ class Bishop extends AChessman
         $this->icons[AChessman::COLOUR_BLACK] = "B";
     }
 
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths()
     {
         for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey ++, $rKey ++) {

@@ -5,7 +5,6 @@ namespace Chessboard;
 use \Iterator;
 use \ArrayAccess;
 use \Countable;
-use \Exception;
 
 /**
  * @author patrick
@@ -17,58 +16,95 @@ class Chessmen implements Iterator, Countable, ArrayAccess
         TCountable,
         TArrayAccess;
 
+    /**
+     * Move a chessman to a certain location.
+     * Check for collisions and/or attack moves.
+     * @param array $from
+     * @param array $to
+     * @return boolean
+     */
     public function move(array $from, array $to)
     {
-        // find chessman which we want to move
+        // find the chessman which we want to move
         list(, $chessman) = $this->find($from);
-        if (false === $chessman) {
-            throw new Exception("Chessman we want to move can not be found");
+        if (is_null($chessman)) {
+            return false;
         }
-        $possibleMoves = $chessman->getPossibleMoves();
-        // if the wanted move is in the possible moves, we will start looking for collisions
-        if (in_array($to, $possibleMoves)) {
-            $path = $chessman->getPath($from, $to);
-            // check for collisions in path to destination location
-            foreach (array_slice($path, 1, count($path) - 2) as $location) {
-                list(, $enemyChessman) = $this->find($location);
-            }
-            if (false !== $chessman) {
-                throw new Exception("Chessman is having a colision when moving");
-            }
-            // no collision found, so move the chessman
-            return $chessman->move($to);
+        // we want to move the chessman to a location it is not possible to move it to
+        if (!in_array($to, $chessman->getPossibleMoves())) {
+            return false;
         }
-        $possibleAttackMoves = $chessman->getPossibleAttackMoves();
-        if (in_array($to, $possibleAttackMoves)) {
-            list(, $enemyChessman) = $this->find($to);
-            // check if the destination chessman is actually an enemy or not
-            if (false === $enemyChessman) {
-                throw new Exception("Enemy chessman can not be found");
-            }
+        // move has collisions with other chessman
+        if ($this->moveHasCollision($chessman->getPath($from, $to))) {
+            return false;
+        }
+        // check if this move is an attack move
+        list(, $enemyChessman) = $this->find($to);
+        // there is an enemy where we want to move to
+        if (!is_null($enemyChessman)) {
+            // if the enemy chessman is in the same team
             if ($chessman->getColour() === $enemyChessman->getColour()) {
-                throw new Exception("Chessman can not take their own colour");
+                return false;
             }
-            // enemy chessman found, remove it, move chessman
+            // move is not an attack move
+            if (!in_array($to, $chessman->getPossibleAttackMoves())) {
+                return false;
+            }
+            // remove enemy chessman
             $this->remove($to);
-            return $chessman->move($to);
+        }
+        return $chessman->move($to);
+    }
+
+    /**
+     * Returns true if there is a collision in the path.
+     * @param array $path
+     * @return boolean
+     */
+    public function moveHasCollision(array $path)
+    {
+        foreach (array_slice($path, 1, count($path) - 2) as $location) {
+            list(, $collisionChessman) = $this->find($location);
+            if (!is_null($collisionChessman)) {
+                return true;
+            }
         }
         return false;
     }
 
+    /**
+     * Find a chessman on a certain location.
+     * @param array $location
+     * @return array|boolean
+     */
     public function find(array $location)
     {
-        foreach ($this->array as $offset => $chessman) {
+        foreach ($this as $offset => $chessman) {
             if ($chessman->getCurrentLocation() === $location) {
                 return array($offset, $chessman);
             }
         }
-        return array(false, false);
+        return false;
     }
 
+    /**
+     * Remove a chessman from a certain location.
+     * @param array $location
+     * @return boolean
+     */
     public function remove(array $location)
     {
+        // if $this->find doesn't find anything, it will return false
+        // php > list($a, $b) = false;
+        // php > var_dump($a, $b);
+        // NULL
+        // NULL
+        // php > 
         list($offset, ) = $this->find($location);
-        $this->offsetUnset($offset);
-        return true;
+        if (!is_null($offset)) {
+            $this->offsetUnset($offset);
+            return true;
+        }
+        return false;
     }
 }

@@ -18,6 +18,10 @@ class Knight extends AChessman
         $this->icons[AChessman::COLOUR_BLACK] = "N";
     }
 
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths()
     {
         /* array(

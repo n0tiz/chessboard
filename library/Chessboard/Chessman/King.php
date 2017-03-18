@@ -19,6 +19,10 @@ class King extends AChessman
         $this->icons[AChessman::COLOUR_BLACK] = "K";
     }
 
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths()
     {
         // king can move the same as a queen, but only one step at a time

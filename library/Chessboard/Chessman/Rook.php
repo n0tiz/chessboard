@@ -18,6 +18,10 @@ class Rook extends AChessman
         $this->icons[AChessman::COLOUR_BLACK] = "R";
     }
 
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths()
     {
         foreach ($this->files as $file) {

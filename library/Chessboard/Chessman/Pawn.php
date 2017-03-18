@@ -18,15 +18,25 @@ class Pawn extends AChessman
         $this->icons[AChessman::COLOUR_BLACK] = "P";
     }
 
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths()
     {
-        $possiblePaths[] = $this->getPossibleMoves();
-        foreach ($this->getPossibleAttackMoves() as $attackPath) {
-            $possiblePaths[] = array($attackPath);
+        $possibleMoves = array_reverse($this->getPossibleMoves());
+        $possibleMoves[] = $this->getCurrentLocation();
+        $possiblePaths[] = array_reverse($possibleMoves);
+        foreach ($this->getPossibleAttackMoves() as $possibleAttackMove) {
+            $possiblePaths[] = array($this->getCurrentLocation(), $possibleAttackMove);
         }
         return $possiblePaths;
     }
 
+    /**
+     * Retrieve the possible moves.
+     * @return array
+     */
     public function getPossibleMoves()
     {
         $possibleMoves = array();
@@ -45,6 +55,10 @@ class Pawn extends AChessman
         return $possibleMoves;
     }
 
+    /**
+     * Retrieve the possible attack moves.
+     * @return array
+     */
     public function getPossibleAttackMoves()
     {
         $possibleAttackMoves = array();

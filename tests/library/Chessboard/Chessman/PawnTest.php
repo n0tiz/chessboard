@@ -104,10 +104,12 @@ class PawnTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $expectedResult = array(
             array(
+                array("a", "2"),
                 array("a", "3"),
                 array("a", "4"),
             ),
             array(
+                array("a", "2"),
                 array("b", "3"),
             ),
         );
@@ -120,9 +122,11 @@ class PawnTest extends AChessmanTest
         $object->move(array("a", "3"));
         $expectedResult = array(
             array(
+                array("a", "3"),
                 array("a", "4"),
             ),
             array(
+                array("a", "3"),
                 array("b", "4"),
             ),
         );
@@ -135,9 +139,11 @@ class PawnTest extends AChessmanTest
         $object->move(array("a", "4"));
         $expectedResult = array(
             array(
+                array("a", "4"),
                 array("a", "5"),
             ),
             array(
+                array("a", "4"),
                 array("b", "5"),
             ),
         );
@@ -147,7 +153,7 @@ class PawnTest extends AChessmanTest
     public function testGetPossiblePathsOutOfBoundaries()
     {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "8"));
-        $expectedResult = array(array());
+        $expectedResult = array(array(array("a", "8")));
         $this->assertSame($expectedResult, $object->getPossiblePaths());
     }
 
@@ -156,13 +162,16 @@ class PawnTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2"));
         $expectedResult = array(
             array(
+                array("b", "2"),
                 array("b", "3"),
                 array("b", "4"),
             ),
             array(
+                array("b", "2"),
                 array("a", "3"),
             ),
             array(
+                array("b", "2"),
                 array("c", "3"),
             ),
         );
@@ -174,10 +183,12 @@ class PawnTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $expectedResult = array(
             array(
+                array("a", "2"),
                 array("a", "3"),
                 array("a", "4"),
             ),
             array(
+                array("a", "2"),
                 array("b", "3"),
             ),
         );
@@ -189,10 +200,12 @@ class PawnTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
         $expectedResult = array(
             array(
+                array("h", "2"),
                 array("h", "3"),
                 array("h", "4"),
             ),
             array(
+                array("h", "2"),
                 array("g", "3"),
             ),
         );

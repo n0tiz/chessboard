@@ -35,60 +35,107 @@ abstract class AChessman implements IChessman
         return $this->getIcon();
     }
 
+    /**
+     * Retrieve the icon if this chessman.
+     * This will be lower cased when the colour is white.
+     * This will be upper cased when the colour is black.
+     * @return string
+     */
     public function getIcon()
     {
         return $this->icons[$this->getColour()];
     }
 
+    /**
+     * Retrieve the file this chessman currently resides on.
+     * @return string
+     */
     public function getFile()
     {
-        return $this->currentLocation[0];
+        return $this->getCurrentLocation()[0];
     }
 
+    /**
+     * Retrieve the rank this chessman currently resides on.
+     * @return string
+     */
     public function getRank()
     {
-        return $this->currentLocation[1];
+        return $this->getCurrentLocation()[1];
     }
 
+    /**
+     * Retrieve the current location of this chessman.
+     * @return array
+     */
     public function getCurrentLocation()
     {
         return $this->currentLocation;
     }
 
+    /**
+     * Retrieve the colour of this chessman.
+     * @return string
+     */
     public function getColour()
     {
         return $this->colour;
     }
 
+    /**
+     * Check if the colour of this chessman is white.
+     * @return boolean
+     */
     public function isWhite()
     {
-        return ($this->getColour() === AChessman::COLOUR_WHITE);
+        return (bool) ($this->getColour() === AChessman::COLOUR_WHITE);
     }
 
+    /**
+     * Check if the colour of this chessman is black.
+     * @return boolean
+     */
     public function isBlack()
     {
-        return ($this->getColour() === AChessman::COLOUR_BLACK);
+        return (bool) ($this->getColour() === AChessman::COLOUR_BLACK);
     }
 
+    /**
+     * Check if this is the first move of this chessman.
+     * @return boolean
+     */
     public function isFirstMove()
     {
-        return (count($this->getPreviousLocations()) === 0);
+        return (bool) (count($this->getPreviousLocations()) === 0);
     }
 
+    /**
+     * Retrieve all the previous locations this chessman has been.
+     * @return array
+     */
     public function getPreviousLocations()
     {
         return $this->previousLocations;
     }
 
+    /**
+     * Move a chessman to a certain location. Also keep a history of locations.
+     * @param array $to
+     * @return boolean
+     */
     public function move(array $to)
     {
         // keep a history of moves of this chessman
-        array_push($this->previousLocations, $this->currentLocation);
+        $this->previousLocations[] = $this->currentLocation;
         // change the current location of this chessman
         $this->currentLocation = $to;
         return true;
     }
 
+    /**
+     * Retrieve the possible moves.
+     * @return array
+     */
     public function getPossibleMoves()
     {
         $possibleMoves = array();
@@ -99,18 +146,31 @@ abstract class AChessman implements IChessman
         return $possibleMoves;
     }
 
+    /**
+     * Retrieve the possible attack moves.
+     * @return array
+     */
     public function getPossibleAttackMoves()
     {
         return $this->getPossibleMoves();
     }
 
+    /**
+     * Retrieve the path a chessman needs to follow to get from $from to $to.
+     * Location $from is required to be the current location of the chessman.
+     * @param array $from
+     * @param array $to
+     * @return array|boolean
+     */
     public function getPath(array $from, array $to)
     {
-        foreach ($this->getPossiblePaths() as $possiblePath) {
-            if (in_array($from, $possiblePath) && in_array($to, $possiblePath)) {
-                $sKey = array_search($from, $possiblePath);
-                $eKey = array_search($to, $possiblePath) + 1;
-                return array_slice($possiblePath, $sKey, $eKey);
+        if ($from === $this->getCurrentLocation()) {
+            foreach ($this->getPossiblePaths() as $possiblePath) {
+                if (in_array($from, $possiblePath) && in_array($to, $possiblePath)) {
+                    $sKey = array_search($from, $possiblePath);
+                    $eKey = array_search($to, $possiblePath) + 1;
+                    return array_slice($possiblePath, $sKey, $eKey);
+                }
             }
         }
         return false;

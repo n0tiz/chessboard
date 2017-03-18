@@ -8,7 +8,9 @@ namespace Chessboard;
 interface IChessman
 {
 
-    public function move(array $to);
-
+    /**
+     * Calculate the possible paths this chessman can move via.
+     * @return array
+     */
     public function getPossiblePaths();
 }
