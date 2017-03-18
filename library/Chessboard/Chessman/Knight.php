@@ -20,6 +20,27 @@ class Knight extends AChessman
 
     public function getPossiblePaths()
     {
-        ;
+        /* array(
+         *  array(file, rank)
+         * )
+         */
+        $pathKeyAdditions = array(
+            array(1, -2),
+            array(2, -1),
+            array(2, 1),
+            array(1, 2),
+            array(-1, 2),
+            array(-2, 1),
+            array(-2, -1),
+            array(-1, -2),
+        );
+        foreach ($pathKeyAdditions as list($fKeyAddition, $rKeyAddition)) {
+            $fKey = array_search($this->getFile(), $this->files) + $fKeyAddition;
+            $rKey = array_search($this->getRank(), $this->ranks) + $rKeyAddition;
+            if (array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks)) {
+                $possiblePaths[] = array($this->getCurrentLocation(), array($this->files[$fKey], $this->ranks[$rKey]));
+            }
+        }
+        return $possiblePaths;
     }
 }
