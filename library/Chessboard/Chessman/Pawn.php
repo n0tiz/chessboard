@@ -24,9 +24,12 @@ class Pawn extends AChessman
      */
     public function getPossiblePaths()
     {
-        $possibleMoves = array_reverse($this->getPossibleMoves());
-        $possibleMoves[] = $this->getCurrentLocation();
-        $possiblePaths[] = array_reverse($possibleMoves);
+        $possiblePaths = array();
+        if (count($this->getPossibleMoves()) > 0) {
+            $possibleMoves = array_reverse($this->getPossibleMoves());
+            $possibleMoves[] = $this->getCurrentLocation();
+            $possiblePaths[] = array_reverse($possibleMoves);
+        }
         foreach ($this->getPossibleAttackMoves() as $possibleAttackMove) {
             $possiblePaths[] = array($this->getCurrentLocation(), $possibleAttackMove);
         }
@@ -40,15 +43,14 @@ class Pawn extends AChessman
     public function getPossibleMoves()
     {
         $possibleMoves = array();
-        // this is the default move of this pawn, one rank at a time
+        // The default of a Pawn is one rank at a time.
+        // Forwards for white, backwards for black.
         $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? 1 : -1);
-        // check if the position exists
         if (array_key_exists($rKey, $this->ranks)) {
             $possibleMoves[] = array($this->getFile(), (string) $this->ranks[$rKey]);
         }
-        // if this is the first move of the pawn, the pawn can move two ranks forward
+        // If it is the first move of a Pawn, two ranks can be moved in once.
         $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? 2 : -2);
-        // check if the position exists
         if ($this->isFirstMove() && array_key_exists($rKey, $this->ranks)) {
             $possibleMoves[] = array($this->getFile(), (string) $this->ranks[$rKey]);
         }
@@ -61,18 +63,15 @@ class Pawn extends AChessman
      */
     public function getPossibleAttackMoves()
     {
+        // Pawns can attack other chessman by going diagonally forwards one step.
         $possibleAttackMoves = array();
-        // file diagonally to the left
         $fKey = array_search($this->getFile(), $this->files) - 1;
         $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? 1 : -1);
-        // check if the position exists
         if (array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks)) {
             $possibleAttackMoves[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }
-        // file diagonally to the right
         $fKey = array_search($this->getFile(), $this->files) + 1;
         $rKey = array_search($this->getRank(), $this->ranks) + ($this->isWhite() ? 1 : -1);
-        // check if the position exists
         if (array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks)) {
             $possibleAttackMoves[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
         }

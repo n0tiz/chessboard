@@ -26,7 +26,7 @@ class Queen extends AChessman
      */
     public function getPossiblePaths()
     {
-        // queen can do all moves a bishop can, and all moves a rook can
+        // Queen can perform all the moves of a Rook and Bishop.
         $bishop = new Bishop($this->getColour(), $this->getCurrentLocation());
         $rook = new Rook($this->getColour(), $this->getCurrentLocation());
         $possiblePaths = array_merge($bishop->getPossiblePaths(), $rook->getPossiblePaths());

@@ -24,10 +24,9 @@ class Knight extends AChessman
      */
     public function getPossiblePaths()
     {
-        /* array(
-         *  array(file, rank)
-         * )
-         */
+        // array(
+        //  array(file, rank)
+        // )
         $pathKeyAdditions = array(
             array(1, -2),
             array(2, -1),

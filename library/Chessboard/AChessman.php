@@ -125,9 +125,9 @@ abstract class AChessman implements IChessman
      */
     public function move(array $to)
     {
-        // keep a history of moves of this chessman
+        // Keep a history of locations this chessman has been.
         $this->previousLocations[] = $this->currentLocation;
-        // change the current location of this chessman
+        // Change the current location of this chessman.
         $this->currentLocation = $to;
         return true;
     }

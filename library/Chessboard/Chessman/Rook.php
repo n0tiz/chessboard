@@ -24,6 +24,9 @@ class Rook extends AChessman
      */
     public function getPossiblePaths()
     {
+        // Rook can go vertically and horizontally.
+        // Horizontally, the rank will stay the same.
+        // Files will go from the beginning of the files until the last.
         foreach ($this->files as $file) {
             $horizontalPath[] = array($file, $this->getRank());
             if ($file == $this->getFile() && count($horizontalPath) > 1) {
@@ -33,6 +36,8 @@ class Rook extends AChessman
             }
         }
         $possiblePaths[] = $horizontalPath;
+        // Vertically, the file will stay the same.
+        // Ranks will go from the beginning of the ranks until the last.
         foreach ($this->ranks as $rank) {
             $verticalPath[] = array($this->getFile(), $rank);
             if ($rank == $this->getRank() && count($verticalPath) > 1) {

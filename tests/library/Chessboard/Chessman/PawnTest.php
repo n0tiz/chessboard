@@ -153,7 +153,7 @@ class PawnTest extends AChessmanTest
     public function testGetPossiblePathsOutOfBoundaries()
     {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "8"));
-        $expectedResult = array(array(array("a", "8")));
+        $expectedResult = array();
         $this->assertSame($expectedResult, $object->getPossiblePaths());
     }
 
