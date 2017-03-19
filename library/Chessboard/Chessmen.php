@@ -31,7 +31,7 @@ class Chessmen implements Iterator, Countable, ArrayAccess
             return false;
         }
         // we want to move the chessman to a location it is not possible to move it to
-        if (!in_array($to, $chessman->getPossibleMoves())) {
+        if (!in_array($to, $chessman->getPossibleMoves()) && !in_array($to, $chessman->getPossibleAttackMoves())) {
             return false;
         }
         // move has collisions with other chessman

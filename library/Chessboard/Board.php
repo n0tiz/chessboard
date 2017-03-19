@@ -39,7 +39,7 @@ class Board
         $this->chessmen[] = new Rook(AChessman::COLOUR_BLACK, array("h", "8"));
         $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("a", "7"));
         $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("b", "7"));
-        $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("c", "3"));
+        $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("c", "7"));
         $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("d", "7"));
         $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("e", "7"));
         $this->chessmen[] = new Pawn(AChessman::COLOUR_BLACK, array("f", "7"));
@@ -70,10 +70,20 @@ class Board
 
     public function __toString()
     {
-        $board = array();
-        foreach ($this->chessmen as $chessman) {
-            $board[$chessman->getFile()][$chessman->getRank()] = $chessman->getIcon();
+        $return = implode("|", $this->files) . PHP_EOL;
+        foreach (array_reverse($this->ranks) as $rank) {
+            $row = array();
+            foreach ($this->files as $file) {
+                list(, $chessman) = $this->chessmen->find(array($file, $rank));
+                if (is_null($chessman)) {
+                    $row[] = " ";
+                } else {
+                    $row[] = $chessman->getIcon();
+                }
+            }
+            $return .= implode("|", $row) . PHP_EOL;
         }
-        return print_r($board, true);
+        $return .= implode("|", $this->files) . PHP_EOL;
+        return $return;
     }
 }
