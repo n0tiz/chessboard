@@ -10,6 +10,7 @@ use Chessboard\Chessman\Queen;
 use Chessboard\Chessman\King;
 use Chessboard\Chessman\Pawn;
 use Chessboard\Chessmen;
+use \Exception;
 
 /**
  * @author patrick
@@ -65,7 +66,11 @@ class Board
 
     public function move(array $from, array $to)
     {
-        return $this->chessmen->move($from, $to);
+        try {
+            return $this->chessmen->move($from, $to);
+        } catch (Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
     }
 
     public function __toString()

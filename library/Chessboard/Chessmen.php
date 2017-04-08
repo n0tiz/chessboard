@@ -5,6 +5,7 @@ namespace Chessboard;
 use \Iterator;
 use \ArrayAccess;
 use \Countable;
+use \Exception;
 
 /**
  * @author patrick
@@ -28,27 +29,31 @@ class Chessmen implements Iterator, Countable, ArrayAccess
         // find the chessman which we want to move
         list(, $chessman) = $this->find($from);
         if (is_null($chessman)) {
-            return false;
+            throw new Exception("Chessman not found.");
         }
         // we want to move the chessman to a location it is not possible to move it to
         if (!in_array($to, $chessman->getPossibleMoves()) && !in_array($to, $chessman->getPossibleAttackMoves())) {
-            return false;
+            throw new Exception("Move not possible for chessman.");
         }
         // move has collisions with other chessman
         if ($this->moveHasCollision($chessman->getPath($from, $to))) {
-            return false;
+            throw new Exception("Collision detected in move.");
         }
         // check if this move is an attack move
         list(, $enemyChessman) = $this->find($to);
+        // if this move is only possible as an attack move, and there is no enemy chessman available
+        if (is_null($enemyChessman) && in_array($to, $chessman->getPossibleAttackMoves()) && !in_array($to, $chessman->getPossibleMoves())) {
+            throw new Exception("Attack move attempted, but no opponent found.");
+        }
         // there is an enemy where we want to move to
         if (!is_null($enemyChessman)) {
-            // if the enemy chessman is in the same team
-            if ($chessman->getColour() === $enemyChessman->getColour()) {
-                return false;
-            }
             // move is not an attack move
             if (!in_array($to, $chessman->getPossibleAttackMoves())) {
-                return false;
+                throw new Exception("Invalid attack move attempted.");
+            }
+            // if the enemy chessman is in the same team
+            if ($chessman->getColour() === $enemyChessman->getColour()) {
+                throw new Exception("Attack move, but opponent is in the same team.");
             }
             // remove enemy chessman
             $this->remove($to);
