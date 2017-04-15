@@ -6,11 +6,15 @@ use \Iterator;
 use \ArrayAccess;
 use \Countable;
 use \Exception;
+use DesignPatterns\Singleton;
+use Utilities\TIterator;
+use Utilities\TCountable;
+use Utilities\TArrayAccess;
 
 /**
  * @author patrick
  */
-class Chessmen implements Iterator, Countable, ArrayAccess
+class Chessmen extends Singleton implements Iterator, Countable, ArrayAccess
 {
 
     use TIterator,

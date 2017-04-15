@@ -81,6 +81,15 @@ abstract class AChessman implements IChessman
     {
         return $this->colour;
     }
+    
+    /**
+     * Retrieve the colour of the opposition.
+     * @return string
+     */
+    public function getOppositeColour()
+    {
+        return ($this->getColour() === AChessman::COLOUR_WHITE ? AChessman::COLOUR_WHITE : AChessman::COLOUR_BLACK);
+    }
 
     /**
      * Check if the colour of this chessman is white.

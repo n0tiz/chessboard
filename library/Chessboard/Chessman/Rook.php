@@ -2,7 +2,7 @@
 
 namespace Chessboard\Chessman;
 
-use \Chessboard\AChessman;
+use Chessboard\AChessman;
 
 /**
  * @author patrick
