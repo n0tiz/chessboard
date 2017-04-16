@@ -5,7 +5,7 @@ namespace DesignPatterns;
 /**
  * @author patrick
  */
-abstract class Singleton
+abstract class ASingleton
 {
 
     final public function __construct()

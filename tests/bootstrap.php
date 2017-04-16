@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../library/DesignPatterns/Singleton.php';
+require_once __DIR__ . '/../library/DesignPatterns/ASingleton.php';
 
 require_once __DIR__ . '/../library/Utilities/TIterator.php';
 require_once __DIR__ . '/../library/Utilities/TArrayAccess.php';
