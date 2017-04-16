@@ -36,7 +36,7 @@ abstract class AChessman implements IChessman
     }
 
     /**
-     * Retrieve the icon if this chessman.
+     * Retrieve the icon of this chessman.
      * This will be lower cased when the colour is white.
      * This will be upper cased when the colour is black.
      * @return string
@@ -88,7 +88,7 @@ abstract class AChessman implements IChessman
      */
     public function getOppositeColour()
     {
-        return ($this->getColour() === AChessman::COLOUR_WHITE ? AChessman::COLOUR_WHITE : AChessman::COLOUR_BLACK);
+        return ($this->isWhite() ? AChessman::COLOUR_BLACK : AChessman::COLOUR_WHITE);
     }
 
     /**
