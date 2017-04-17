@@ -44,6 +44,7 @@ class Knight extends AChessman
                 $possiblePaths[] = array($this->getCurrentLocation(), array($this->files[$fKey], $this->ranks[$rKey]));
             }
         }
-        return $possiblePaths;
+        $possiblePaths = $this->removeFriendlyCollisionsFromPaths($possiblePaths);
+        return $this->removeEmptyPaths($possiblePaths);
     }
 }
