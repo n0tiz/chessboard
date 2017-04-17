@@ -53,12 +53,6 @@ class QueenTest extends AChessmanTest
             ),
             array(
                 array("d", "1"),
-            ),
-            array(
-                array("d", "1"),
-            ),
-            array(
-                array("d", "1"),
                 array("c", "1"),
                 array("b", "1"),
                 array("a", "1"),
@@ -148,12 +142,6 @@ class QueenTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Queen(\Chessboard\AChessman::COLOUR_WHITE, array("f", "8"));
         $expectedResult = array(
             array(
-                array("f", "8")
-            ),
-            array(
-                array("f", "8")
-            ),
-            array(
                 array("f", "8"),
                 array("e", "7"),
                 array("d", "6"),
@@ -189,9 +177,6 @@ class QueenTest extends AChessmanTest
                 array("f", "2"),
                 array("f", "1"),
             ),
-            array(
-                array("f", "8"),
-            ),
         );
         $this->assertSame($expectedResult, $object->getPossiblePaths());
     }
@@ -200,9 +185,6 @@ class QueenTest extends AChessmanTest
     {
         $object = new \Chessboard\Chessman\Queen(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
         $expectedResult = array(
-            array(
-                array("h", "2"),
-            ),
             array(
                 array("h", "2"),
                 array("g", "3"),
@@ -218,9 +200,6 @@ class QueenTest extends AChessmanTest
             ),
             array(
                 array("h", "2"),
-            ),
-            array(
-                array("h", "2"),
                 array("g", "2"),
                 array("f", "2"),
                 array("e", "2"),
@@ -228,9 +207,6 @@ class QueenTest extends AChessmanTest
                 array("c", "2"),
                 array("b", "2"),
                 array("a", "2"),
-            ),
-            array(
-                array("h", "2"),
             ),
             array(
                 array("h", "2"),

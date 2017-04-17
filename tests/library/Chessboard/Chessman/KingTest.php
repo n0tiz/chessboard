@@ -48,12 +48,6 @@ class KingTest extends AChessmanTest
             ),
             array(
                 array("e", "1"),
-            ),
-            array(
-                array("e", "1"),
-            ),
-            array(
-                array("e", "1"),
                 array("d", "1"),
             ),
             array(

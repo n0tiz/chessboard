@@ -51,12 +51,6 @@ class BishopTest extends AChessmanTest
                 array("b", "2"),
                 array("a", "3"),
             ),
-            array(
-                array("c", "1"),
-            ),
-            array(
-                array("c", "1"),
-            ),
         );
         $this->assertSame($expectedResult, $object->getPossiblePaths());
     }

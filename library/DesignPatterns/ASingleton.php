@@ -12,7 +12,7 @@ abstract class ASingleton
 
     final public function __construct()
     {
-
+        
     }
 
     final public function __clone()

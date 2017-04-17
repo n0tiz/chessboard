@@ -81,7 +81,7 @@ abstract class AChessman implements IChessman
     {
         return $this->colour;
     }
-    
+
     /**
      * Retrieve the colour of the opposition.
      * @return string
@@ -183,5 +183,128 @@ abstract class AChessman implements IChessman
             }
         }
         return false;
+    }
+
+    /**
+     * Get the possible diagonal paths from the current location of this chessman.
+     * @return array
+     */
+    public function getDiagonalPaths()
+    {
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey ++, $rKey ++) {
+            $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
+        }
+        $possiblePaths[] = $possiblePath;
+        unset($possiblePath);
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey --, $rKey ++) {
+            $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
+        }
+        $possiblePaths[] = $possiblePath;
+        unset($possiblePath);
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey --, $rKey --) {
+            $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
+        }
+        $possiblePaths[] = $possiblePath;
+        unset($possiblePath);
+        for ($fKey = array_search($this->getFile(), $this->files), $rKey = array_search($this->getRank(), $this->ranks); array_key_exists($fKey, $this->files) && array_key_exists($rKey, $this->ranks); $fKey ++, $rKey --) {
+            $possiblePath[] = array((string) $this->files[$fKey], (string) $this->ranks[$rKey]);
+        }
+        $possiblePaths[] = $possiblePath;
+        return $possiblePaths;
+    }
+
+    /**
+     * Get the possible horizontal paths from the current location of this chessman.
+     * @return array
+     */
+    public function getHorizontalPaths()
+    {
+        // Horizontally, the rank will stay the same.
+        // Files will go from the beginning of the files until the last.
+        foreach ($this->files as $file) {
+            $horizontalPath[] = array($file, $this->getRank());
+            if ($file == $this->getFile() && count($horizontalPath) > 1) {
+                $possiblePaths[] = array_reverse($horizontalPath);
+                unset($horizontalPath);
+                $horizontalPath[] = $this->getCurrentLocation();
+            }
+        }
+        $possiblePaths[] = $horizontalPath;
+        return $possiblePaths;
+    }
+
+    /**
+     * Get the possible vertical paths from the current location of this chessman.
+     * @return array
+     */
+    public function getVerticalPaths()
+    {
+        // Vertically, the file will stay the same.
+        // Ranks will go from the beginning of the ranks until the last.
+        foreach ($this->ranks as $rank) {
+            $verticalPath[] = array($this->getFile(), $rank);
+            if ($rank == $this->getRank() && count($verticalPath) > 1) {
+                $possiblePaths[] = array_reverse($verticalPath);
+                unset($verticalPath);
+                $verticalPath[] = $this->getCurrentLocation();
+            }
+        }
+        $possiblePaths[] = $verticalPath;
+        return $possiblePaths;
+    }
+
+    /**
+     * Remove any paths which have no steps, or where the only step is the current location of this chessman.
+     * @param array $possiblePaths
+     * @return array
+     */
+    public function removeEmptyPaths(array $possiblePaths)
+    {
+        // remove paths which start and end at the current location
+        return array_filter($possiblePaths, function($value) {
+            return !(count($value) === 0 || (count($value) === 1 && reset($value) === $this->getCurrentLocation()));
+        });
+    }
+
+    /**
+     * Remove any steps coming after a collision with a friendly chessman. The step where the friendly resides, will be removed as well.
+     * @param array $possiblePaths
+     * @return array
+     */
+    public function removeFriendlyCollisionsFromPaths(array $possiblePaths)
+    {
+        array_walk($possiblePaths, function(&$possiblePath) {
+            $chessmen = \Chessboard\Chessmen::getInstance();
+            foreach (array_values($possiblePath) as $step => $possibleStep) {
+                list(, $chessman) = $chessmen->find($possibleStep);
+                // remove first friendly collisions from paths
+                if ($possibleStep !== $this->getCurrentLocation() && !is_null($chessman) && $chessman->getColour() === $this->getColour()) {
+                    $possiblePath = array_slice($possiblePath, 0, $step);
+                    break;
+                }
+            }
+        });
+        return $possiblePaths;
+    }
+
+    /**
+     * Remove any steps coming after a collision with an enemy chessman. The step where the enemy resides, will NOT be removed.
+     * @param array $possiblePaths
+     * @return array
+     */
+    public function removeEnemyCollisionsFromPaths(array $possiblePaths)
+    {
+        array_walk($possiblePaths, function(&$possiblePath) {
+            $chessmen = \Chessboard\Chessmen::getInstance();
+            foreach (array_values($possiblePath) as $step => $possibleStep) {
+                list(, $chessman) = $chessmen->find($possibleStep);
+                // remove first enemy collisions from paths
+                if ($possibleStep !== $this->getCurrentLocation() && !is_null($chessman) && $chessman->getColour() === $this->getOppositeColour()) {
+                    $possiblePath = array_slice($possiblePath, 0, $step + 1);
+                    break;
+                }
+            }
+        });
+        return $possiblePaths;
     }
 }

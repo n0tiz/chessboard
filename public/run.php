@@ -17,14 +17,21 @@ require_once __DIR__ . '/../library/Chessboard/Chessman/Queen.php';
 require_once __DIR__ . '/../library/Chessboard/Chessman/Rook.php';
 
 $chessboard = new \Chessboard\Board();
-echo $chessboard;
-$from = trim(readline("From: "));
-$to = trim(readline("To: "));
-while (strlen($from) > 0 && strlen($to) > 0) {
-    list ($fromFile, $fromRank) = explode(",", $from);
-    list ($toFile, $toRank) = explode(",", $to);
-    $chessboard->move(array($fromFile, $fromRank), array($toFile, $toRank));
-    echo $chessboard;
-    $from = trim(readline("From: "));
-    $to = trim(readline("To: "));
-}
+/* echo $chessboard;
+  $from = trim(readline("From: "));
+  $to = trim(readline("To: "));
+  while (strlen($from) > 0 && strlen($to) > 0) {
+  list ($fromFile, $fromRank) = explode(",", $from);
+  list ($toFile, $toRank) = explode(",", $to);
+  $chessboard->move(array($fromFile, $fromRank), array($toFile, $toRank));
+  echo $chessboard;
+  $from = trim(readline("From: "));
+  $to = trim(readline("To: "));
+  } */
+
+$chessmen = \Chessboard\Chessmen::getInstance();
+list(, $chessman) = $chessmen->find(array("a", "8"));
+var_dump(get_class($chessman));
+$possiblePaths = $chessman->getPossiblePaths();
+//var_dump($possiblePaths);
+var_dump($chessman->cleanPaths($possiblePaths));
