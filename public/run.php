@@ -30,8 +30,7 @@ $chessboard = new \Chessboard\Board();
   } */
 
 $chessmen = \Chessboard\Chessmen::getInstance();
-list(, $chessman) = $chessmen->find(array("a", "8"));
+list(, $chessman) = $chessmen->find(array("a", "7"));
 var_dump(get_class($chessman));
-$possiblePaths = $chessman->getPossiblePaths();
-//var_dump($possiblePaths);
-var_dump($chessman->cleanPaths($possiblePaths));
+var_dump($chessman->getColour());
+var_dump($chessman->getPossiblePaths());

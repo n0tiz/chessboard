@@ -3,6 +3,7 @@
 namespace Chessboard\Chessman;
 
 use Chessboard\AChessman;
+use Chessboard\Chessmen;
 
 /**
  * @author patrick
@@ -24,16 +25,52 @@ class Pawn extends AChessman
      */
     public function getPossiblePaths()
     {
-        $possiblePaths = array();
+        $possibleForwardPaths = $this->getPossibleForwardPaths();
+        $possibleAttackPaths = $this->getPossibleAttackPaths();
+        $possiblePaths = array_merge($possibleForwardPaths, $possibleAttackPaths);
+        return $this->removeEmptyPaths($possiblePaths);
+    }
+
+    /**
+     * Retrieve the possible forward paths of this Pawn.
+     * @return array
+     */
+    public function getPossibleForwardPaths()
+    {
+        $possibleForwardPaths = array();
+        // We first get the possible forward paths, for a Pawn they are the normal moves.
         if (count($this->getPossibleMoves()) > 0) {
             $possibleMoves = array_reverse($this->getPossibleMoves());
             $possibleMoves[] = $this->getCurrentLocation();
-            $possiblePaths[] = array_reverse($possibleMoves);
+            $possibleForwardPaths[] = array_reverse($possibleMoves);
         }
+        // These are the forward paths, they are never attack moves.
+        // We need to remove any friendly collisions.
+        $possibleForwardPaths = $this->removeFriendlyCollisionsFromPaths($possibleForwardPaths);
+        // We need to remove any enemy collisions, but on the same way as we remove friendly collisions.
+        $pawn = new Pawn($this->getOppositeColour(), $this->getCurrentLocation());
+        $possibleForwardPaths = $pawn->removeFriendlyCollisionsFromPaths($possibleForwardPaths);
+        // Now we have forward movement paths which do not collide with anyone.
+        return $possibleForwardPaths;
+    }
+
+    /**
+     * Retrieve the possible attack paths of this Pawn.
+     * @return array
+     */
+    public function getPossibleAttackPaths()
+    {
+        $possibleAttackPaths = array();
+        $chessmen = Chessmen::getInstance();
         foreach ($this->getPossibleAttackMoves() as $possibleAttackMove) {
-            $possiblePaths[] = array($this->getCurrentLocation(), $possibleAttackMove);
+            // We need to ensure that any of the attack paths does actually attack an enemy.
+            list(, $chessman) = $chessmen->find($possibleAttackMove);
+            // Only add to the list if is an actual attack path.
+            if (!is_null($chessman) && $chessman->getColour() === $this->getOppositeColour()) {
+                $possibleAttackPaths[] = array($this->getCurrentLocation(), $possibleAttackMove);
+            }
         }
-        return $possiblePaths;
+        return $possibleAttackPaths;
     }
 
     /**
