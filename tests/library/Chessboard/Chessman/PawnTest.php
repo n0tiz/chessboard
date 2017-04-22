@@ -103,7 +103,7 @@ class PawnTest extends AChessmanTest
     {
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "3"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $expectedResult = array(
             array(
@@ -123,7 +123,7 @@ class PawnTest extends AChessmanTest
     {
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "4"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $object->move(array("a", "3"));
         $expectedResult = array(
@@ -143,7 +143,7 @@ class PawnTest extends AChessmanTest
     {
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "5"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $object->move(array("a", "4"));
         $expectedResult = array(
@@ -171,7 +171,7 @@ class PawnTest extends AChessmanTest
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "3"));
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("c", "3"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2"));
         $expectedResult = array(
             array(
@@ -195,7 +195,7 @@ class PawnTest extends AChessmanTest
     {
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("b", "3"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));
         $expectedResult = array(
             array(
@@ -215,7 +215,7 @@ class PawnTest extends AChessmanTest
     {
         $chessmen = \Chessboard\Chessmen::getInstance();
         $chessmen[] = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("g", "3"));
-        
+
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
         $expectedResult = array(
             array(
