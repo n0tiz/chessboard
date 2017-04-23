@@ -39,10 +39,6 @@ class Chessmen extends ASingleton implements Iterator, Countable, ArrayAccess
         if (!in_array($to, $chessman->getPossibleMoves()) && !in_array($to, $chessman->getPossibleAttackMoves())) {
             throw new Exception("Move not possible for chessman.");
         }
-        // move has collisions with other chessman
-        if ($this->moveHasCollision($chessman->getPath($from, $to))) {
-            throw new Exception("Collision detected in move.");
-        }
         // check if this move is an attack move
         list(, $enemyChessman) = $this->find($to);
         // if this move is only possible as an attack move, and there is no enemy chessman available
@@ -63,22 +59,6 @@ class Chessmen extends ASingleton implements Iterator, Countable, ArrayAccess
             $this->remove($to);
         }
         return $chessman->move($to);
-    }
-
-    /**
-     * Returns true if there is a collision in the path.
-     * @param array $path
-     * @return boolean
-     */
-    public function moveHasCollision(array $path)
-    {
-        foreach (array_slice($path, 1, count($path) - 2) as $location) {
-            list(, $collisionChessman) = $this->find($location);
-            if (!is_null($collisionChessman)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
