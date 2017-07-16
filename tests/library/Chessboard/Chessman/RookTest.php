@@ -10,30 +10,6 @@ use tests\Chessboard\AChessmanTest;
 class RookTest extends AChessmanTest
 {
 
-    public function testGetIconWhite()
-    {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("r", $object->getIcon());
-    }
-
-    public function testGetIconBlack()
-    {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("R", $object->getIcon());
-    }
-
-    public function testToStringWhite()
-    {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("r", (string) $object);
-    }
-
-    public function testToStringBlack()
-    {
-        $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("R", (string) $object);
-    }
-
     public function testGetPossiblePaths1()
     {
         $object = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));

@@ -10,30 +10,6 @@ use tests\Chessboard\AChessmanTest;
 class PawnTest extends AChessmanTest
 {
 
-    public function testGetIconWhite()
-    {
-        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("p", $object->getIcon());
-    }
-
-    public function testGetIconBlack()
-    {
-        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("P", $object->getIcon());
-    }
-
-    public function testToStringWhite()
-    {
-        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("p", (string) $object);
-    }
-
-    public function testToStringBlack()
-    {
-        $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("P", (string) $object);
-    }
-
     public function testGetPossibleMovesFirstMove()
     {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("a", "2"));

@@ -10,6 +10,62 @@ use PHPUnit\Framework\TestCase;
 abstract class AChessmanTest extends TestCase
 {
 
+    public function testToStringWhite()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
+            ->getMockForAbstractClass();
+        $property = new \ReflectionProperty($object, "icons");
+        $property->setAccessible(true);
+        $property->setValue($object, array(
+            \Chessboard\AChessman::COLOUR_WHITE => "i",
+            \Chessboard\AChessman::COLOUR_BLACK => "I",
+        ));
+        $this->assertSame("i", (string) $object);
+    }
+
+    public function testToStringBlack()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1")))
+            ->getMockForAbstractClass();
+        $property = new \ReflectionProperty($object, "icons");
+        $property->setAccessible(true);
+        $property->setValue($object, array(
+            \Chessboard\AChessman::COLOUR_WHITE => "i",
+            \Chessboard\AChessman::COLOUR_BLACK => "I",
+        ));
+        $this->assertSame("I", (string) $object);
+    }
+
+    public function testGetIconWhite()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
+            ->getMockForAbstractClass();
+        $property = new \ReflectionProperty($object, "icons");
+        $property->setAccessible(true);
+        $property->setValue($object, array(
+            \Chessboard\AChessman::COLOUR_WHITE => "i",
+            \Chessboard\AChessman::COLOUR_BLACK => "I",
+        ));
+        $this->assertSame("i", $object->getIcon());
+    }
+
+    public function testGetIconBlack()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1")))
+            ->getMockForAbstractClass();
+        $property = new \ReflectionProperty($object, "icons");
+        $property->setAccessible(true);
+        $property->setValue($object, array(
+            \Chessboard\AChessman::COLOUR_WHITE => "i",
+            \Chessboard\AChessman::COLOUR_BLACK => "I",
+        ));
+        $this->assertSame("I", $object->getIcon());
+    }
+
     public function testGetFile()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
@@ -48,6 +104,22 @@ abstract class AChessmanTest extends TestCase
             ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1")))
             ->getMockForAbstractClass();
         $this->assertSame(\Chessboard\AChessman::COLOUR_BLACK, $object->getColour());
+    }
+
+    public function testGetOppositeColourWhite()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
+            ->getMockForAbstractClass();
+        $this->assertSame(\Chessboard\AChessman::COLOUR_BLACK, $object->getOppositeColour());
+    }
+
+    public function testGetOppositeColourBlack()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1")))
+            ->getMockForAbstractClass();
+        $this->assertSame(\Chessboard\AChessman::COLOUR_WHITE, $object->getOppositeColour());
     }
 
     public function testIsWhiteTrue()
@@ -99,7 +171,7 @@ abstract class AChessmanTest extends TestCase
         $this->assertFalse($object->isFirstMove());
     }
 
-    public function testGetPreviousLocations1()
+    public function testGetPreviousLocationsNone()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
             ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
@@ -107,7 +179,7 @@ abstract class AChessmanTest extends TestCase
         $this->assertSame(array(), $object->getPreviousLocations());
     }
 
-    public function testGetPreviousLocations2()
+    public function testGetPreviousLocationsOne()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
             ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
@@ -119,7 +191,7 @@ abstract class AChessmanTest extends TestCase
         $this->assertSame($expectedResult, $object->getPreviousLocations());
     }
 
-    public function testGetPreviousLocations3()
+    public function testGetPreviousLocationsTwo()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
             ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
@@ -132,12 +204,4 @@ abstract class AChessmanTest extends TestCase
         );
         $this->assertSame($expectedResult, $object->getPreviousLocations());
     }
-
-    abstract public function testGetIconWhite();
-
-    abstract public function testGetIconBlack();
-
-    abstract public function testToStringWhite();
-
-    abstract public function testToStringBlack();
 }

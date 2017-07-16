@@ -10,30 +10,6 @@ use tests\Chessboard\AChessmanTest;
 class KingTest extends AChessmanTest
 {
 
-    public function testGetIconWhite()
-    {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("k", $object->getIcon());
-    }
-
-    public function testGetIconBlack()
-    {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("K", $object->getIcon());
-    }
-
-    public function testToStringWhite()
-    {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("k", (string) $object);
-    }
-
-    public function testToStringBlack()
-    {
-        $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("K", (string) $object);
-    }
-
     public function testGetPossiblePaths1()
     {
         $object = new \Chessboard\Chessman\King(\Chessboard\AChessman::COLOUR_WHITE, array("e", "1"));

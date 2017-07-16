@@ -10,30 +10,6 @@ use tests\Chessboard\AChessmanTest;
 class BishopTest extends AChessmanTest
 {
 
-    public function testGetIconWhite()
-    {
-        $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("b", $object->getIcon());
-    }
-
-    public function testGetIconBlack()
-    {
-        $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("B", $object->getIcon());
-    }
-
-    public function testToStringWhite()
-    {
-        $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1"));
-        $this->assertSame("b", (string) $object);
-    }
-
-    public function testToStringBlack()
-    {
-        $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_BLACK, array("a", "1"));
-        $this->assertSame("B", (string) $object);
-    }
-
     public function testGetPossiblePaths1()
     {
         $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_WHITE, array("c", "1"));
