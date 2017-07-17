@@ -204,4 +204,91 @@ abstract class AChessmanTest extends TestCase
         );
         $this->assertSame($expectedResult, $object->getPreviousLocations());
     }
+    
+    public function testMove()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("a", "1")))
+            ->getMockForAbstractClass();
+        $object->move(array("a", "2"));
+        $this->assertSame(array("a", "2"), $object->getCurrentLocation());
+        $this->assertSame(array(array("a", "1")), $object->getPreviousLocations());
+    }
+    
+    public function testGetDiagonalPaths()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2")))
+            ->getMockForAbstractClass();
+        $expectedResult = array(
+            array(
+                array("b", "2"),
+                array("c", "3"),
+                array("d", "4"),
+                array("e", "5"),
+                array("f", "6"),
+                array("g", "7"),
+                array("h", "8"),
+            ),
+            array(
+                array("b", "2"),
+                array("a", "3"),
+            ),
+            array(
+                array("b", "2"),
+                array("a", "1"),
+            ),
+            array(
+                array("b", "2"),
+                array("c", "1"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getDiagonalPaths());
+    }
+    
+    public function testGetHorizontalPaths()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2")))
+            ->getMockForAbstractClass();
+        $expectedResult = array(
+            array(
+                array("b", "2"),
+                array("a", "2"),
+            ),
+            array(
+                array("b", "2"),
+                array("c", "2"),
+                array("d", "2"),
+                array("e", "2"),
+                array("f", "2"),
+                array("g", "2"),
+                array("h", "2"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getHorizontalPaths());
+    }
+    
+    public function testGetVerticalPaths()
+    {
+        $object = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array("b", "2")))
+            ->getMockForAbstractClass();
+        $expectedResult = array(
+            array(
+                array("b", "2"),
+                array("b", "1"),
+            ),
+            array(
+                array("b", "2"),
+                array("b", "3"),
+                array("b", "4"),
+                array("b", "5"),
+                array("b", "6"),
+                array("b", "7"),
+                array("b", "8"),
+            ),
+        );
+        $this->assertSame($expectedResult, $object->getVerticalPaths());
+    }
 }
