@@ -2,7 +2,7 @@
 
 namespace Chessboard\Chessman;
 
-use Chessboard\AChessman;
+use \Chessboard\AChessman;
 
 /**
  * @author patrick
@@ -26,8 +26,6 @@ class Bishop extends AChessman
     {
         // Bishops can move diagonally forwards and backwards.
         $possiblePaths = $this->getDiagonalPaths();
-        $possiblePaths = $this->removeEnemyCollisionsFromPaths($possiblePaths);
-        $possiblePaths = $this->removeFriendlyCollisionsFromPaths($possiblePaths);
-        return $this->removeEmptyPaths($possiblePaths);
+        return $possiblePaths;
     }
 }

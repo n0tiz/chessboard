@@ -2,9 +2,9 @@
 
 namespace Chessboard\Chessman;
 
-use Chessboard\AChessman;
-use Chessboard\Chessman\Rook;
-use Chessboard\Chessman\Bishop;
+use \Chessboard\AChessman;
+use \Chessboard\Chessman\Rook;
+use \Chessboard\Chessman\Bishop;
 
 /**
  * @author patrick

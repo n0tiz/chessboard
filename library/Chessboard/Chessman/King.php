@@ -2,8 +2,8 @@
 
 namespace Chessboard\Chessman;
 
-use Chessboard\AChessman;
-use Chessboard\Chessman\Queen;
+use \Chessboard\AChessman;
+use \Chessboard\Chessman\Queen;
 
 /**
  * @author patrick

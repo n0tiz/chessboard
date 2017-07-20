@@ -2,7 +2,7 @@
 
 namespace Chessboard\Chessman;
 
-use Chessboard\AChessman;
+use \Chessboard\AChessman;
 
 /**
  * @author patrick
@@ -44,7 +44,6 @@ class Knight extends AChessman
                 $possiblePaths[] = array($this->getCurrentLocation(), array($this->files[$fKey], $this->ranks[$rKey]));
             }
         }
-        $possiblePaths = $this->removeFriendlyCollisionsFromPaths($possiblePaths);
-        return $this->removeEmptyPaths($possiblePaths);
+        return $possiblePaths;
     }
 }

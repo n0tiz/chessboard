@@ -2,7 +2,7 @@
 
 namespace Chessboard\Chessman;
 
-use Chessboard\AChessman;
+use \Chessboard\AChessman;
 
 /**
  * @author patrick
@@ -28,8 +28,6 @@ class Rook extends AChessman
         $horizontalPaths = $this->getHorizontalPaths();
         $verticalPaths = $this->getVerticalPaths();
         $possiblePaths = array_merge($horizontalPaths, $verticalPaths);
-        $possiblePaths = $this->removeEnemyCollisionsFromPaths($possiblePaths);
-        $possiblePaths = $this->removeFriendlyCollisionsFromPaths($possiblePaths);
-        return $this->removeEmptyPaths($possiblePaths);
+        return $possiblePaths;
     }
 }

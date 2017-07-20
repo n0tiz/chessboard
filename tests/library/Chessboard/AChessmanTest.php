@@ -204,7 +204,7 @@ abstract class AChessmanTest extends TestCase
         );
         $this->assertSame($expectedResult, $object->getPreviousLocations());
     }
-    
+
     public function testMove()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
@@ -214,7 +214,7 @@ abstract class AChessmanTest extends TestCase
         $this->assertSame(array("a", "2"), $object->getCurrentLocation());
         $this->assertSame(array(array("a", "1")), $object->getPreviousLocations());
     }
-    
+
     public function testGetDiagonalPaths()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
@@ -245,7 +245,7 @@ abstract class AChessmanTest extends TestCase
         );
         $this->assertSame($expectedResult, $object->getDiagonalPaths());
     }
-    
+
     public function testGetHorizontalPaths()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)
@@ -268,7 +268,7 @@ abstract class AChessmanTest extends TestCase
         );
         $this->assertSame($expectedResult, $object->getHorizontalPaths());
     }
-    
+
     public function testGetVerticalPaths()
     {
         $object = $this->getMockBuilder(\Chessboard\AChessman::class)

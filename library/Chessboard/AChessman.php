@@ -2,7 +2,7 @@
 
 namespace Chessboard;
 
-use Chessboard\IChessman;
+use \Chessboard\IChessman;
 
 /**
  * @author patrick
@@ -250,61 +250,6 @@ abstract class AChessman implements IChessman
             }
         }
         $possiblePaths[] = $verticalPath;
-        return $possiblePaths;
-    }
-
-    /**
-     * Remove any paths which have no steps, or where the only step is the current location of this chessman.
-     * @param array $possiblePaths
-     * @return array
-     */
-    public function removeEmptyPaths(array $possiblePaths)
-    {
-        // remove paths which start and end at the current location
-        return array_filter($possiblePaths, function($value) {
-            return !(count($value) === 0 || (count($value) === 1 && reset($value) === $this->getCurrentLocation()));
-        });
-    }
-
-    /**
-     * Remove any steps coming after a collision with a friendly chessman. The step where the friendly resides, will be removed as well.
-     * @param array $possiblePaths
-     * @return array
-     */
-    public function removeFriendlyCollisionsFromPaths(array $possiblePaths)
-    {
-        array_walk($possiblePaths, function(&$possiblePath) {
-            $chessmen = \Chessboard\Chessmen::getInstance();
-            foreach (array_values($possiblePath) as $step => $possibleStep) {
-                list(, $chessman) = $chessmen->find($possibleStep);
-                // remove first friendly collisions from paths
-                if ($possibleStep !== $this->getCurrentLocation() && !is_null($chessman) && $chessman->getColour() === $this->getColour()) {
-                    $possiblePath = array_slice($possiblePath, 0, $step);
-                    break;
-                }
-            }
-        });
-        return $possiblePaths;
-    }
-
-    /**
-     * Remove any steps coming after a collision with an enemy chessman. The step where the enemy resides, will NOT be removed.
-     * @param array $possiblePaths
-     * @return array
-     */
-    public function removeEnemyCollisionsFromPaths(array $possiblePaths)
-    {
-        array_walk($possiblePaths, function(&$possiblePath) {
-            $chessmen = \Chessboard\Chessmen::getInstance();
-            foreach (array_values($possiblePath) as $step => $possibleStep) {
-                list(, $chessman) = $chessmen->find($possibleStep);
-                // remove first enemy collisions from paths
-                if ($possibleStep !== $this->getCurrentLocation() && !is_null($chessman) && $chessman->getColour() === $this->getOppositeColour()) {
-                    $possiblePath = array_slice($possiblePath, 0, $step + 1);
-                    break;
-                }
-            }
-        });
         return $possiblePaths;
     }
 }
