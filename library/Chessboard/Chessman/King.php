@@ -32,29 +32,4 @@ class King extends AChessman
         }
         return $possiblePaths;
     }
-
-    /**
-     * Check if this King is check or not.
-     * @return boolean
-     */
-    public function isCheck()
-    {
-        $chessmen = Chessmen::getInstance();
-        // go through each player's attack moves and verify if the attack is on the king.
-        foreach ($chessmen as $chessman) {
-            if ($chessman->getColour() === $this->getOppositeColour() && in_array($this->getCurrentLocation(), $chessman->getPossibleAttackMoves())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Check if this King is mate or not.
-     * @return boolean
-     */
-    public function isMate()
-    {
-        
-    }
 }
