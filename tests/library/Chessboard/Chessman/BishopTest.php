@@ -9,6 +9,12 @@ use tests\Chessboard\AChessmanTest;
  */
 class BishopTest extends AChessmanTest
 {
+    
+    public function testGetChessmanName()
+    {
+        $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
+        $this->assertSame("Bishop", $object->getChessmanName());
+    }
 
     public function pathProvider()
     {

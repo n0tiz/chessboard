@@ -36,6 +36,17 @@ abstract class AChessman implements IChessman
     }
 
     /**
+     * @return string
+     */
+    public function getChessmanName()
+    {
+        $className = get_class($this);
+        $classNameParts = explode("\\", $className);
+        $chessmanName = end($classNameParts);
+        return $chessmanName;
+    }
+
+    /**
      * Retrieve the icon of this chessman.
      * This will be lower cased when the colour is white.
      * This will be upper cased when the colour is black.

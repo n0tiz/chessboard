@@ -2,7 +2,7 @@
 
 namespace tests\Chessboard;
 
-use PHPUnit\Framework\TestCase;
+use \PHPUnit\Framework\TestCase;
 
 /**
  * @author patrick

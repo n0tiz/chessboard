@@ -5,12 +5,16 @@ namespace Chessboard;
 use \Chessboard\ChessmanList;
 use \Chessboard\AChessman;
 use \Chessboard\Chessman\Pawn;
+use \Exception;
 
 /**
  * @author patrick
  */
 class Chessboard
 {
+
+    public $files = array("a", "b", "c", "d", "e", "f", "g", "h");
+    public $ranks = array("1", "2", "3", "4", "5", "6", "7", "8");
 
     /**
      * @var ChessmanList
@@ -214,11 +218,80 @@ class Chessboard
 
     /**
      * 
+     * @param array $location
+     * @return array
+     */
+    public function getPossibleMovesForChessmanOnLocation(array $location)
+    {
+        $possiblePaths = $this->getPossiblePathsForChessmanOnLocation($location);
+        $possibleMoves = array();
+        foreach ($possiblePaths as $possiblePath) {
+            array_shift($possiblePath);
+            $possibleMoves = array_merge($possibleMoves, $possiblePath);
+        }
+        return $possibleMoves;
+    }
+
+    /**
+     * 
      * @param AChessman $chessman
      * @return array
      */
     public function getPossiblePathsForChessman(AChessman $chessman)
     {
         return $this->getPossiblePathsForChessmanOnLocation($chessman->getCurrentLocation());
+    }
+
+    /**
+     * 
+     * @param AChessman $chessman
+     * @return array
+     */
+    public function getPossibleMovesForChessman(AChessman $chessman)
+    {
+        return $this->getPossibleMovesForChessmanOnLocation($chessman->getCurrentLocation());
+    }
+
+    /**
+     * 
+     * @param array $fromLocation
+     * @param array $toLocation
+     */
+    public function moveChessmanFromLocationToLocation(array $fromLocation, array $toLocation)
+    {
+        $chessman = $this->findChessmanOnLocation($fromLocation);
+        if (is_null($chessman)) {
+            throw new Exception("No chessman found on location " . json_encode($fromLocation));
+        }
+        if (!in_array($toLocation, $this->getPossibleMovesForChessman($chessman))) {
+            throw new Exception("Move from " . json_encode($fromLocation) . " to " . json_encode($toLocation) . " not allowed for " . $chessman->getChessmanName());
+        }
+        $enemyChessman = $this->findEnemyChessmanOnLocation($chessman, $toLocation);
+        if (!is_null($enemyChessman)) {
+            // enemy found on destination
+            // remove the enemy chessman
+            $this->removeChessman($enemyChessman);
+        }
+        // move the chessman
+        return $chessman->move($toLocation);
+    }
+
+    public function __toString()
+    {
+        $return = implode("|", $this->files) . PHP_EOL;
+        foreach (array_reverse($this->ranks) as $rank) {
+            $row = array();
+            foreach ($this->files as $file) {
+                $chessman = $this->findChessmanOnLocation(array($file, $rank));
+                if (is_null($chessman)) {
+                    $row[] = " ";
+                } else {
+                    $row[] = $chessman->getIcon();
+                }
+            }
+            $return .= implode("|", $row) . PHP_EOL;
+        }
+        $return .= implode("|", $this->files) . PHP_EOL;
+        return $return;
     }
 }
