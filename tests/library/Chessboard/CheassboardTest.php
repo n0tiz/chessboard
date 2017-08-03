@@ -17,7 +17,7 @@ class CheassboardTest extends TestCase
         $this->assertInstanceOf('\Chessboard\ChessmanList', $object->getChessmanList());
     }
     
-    public function removeChessmanProvider()
+    public function locationProvider()
     {
         return array(
             array(array("a", "1")),
@@ -88,16 +88,15 @@ class CheassboardTest extends TestCase
     }
     
     /**
-     * @dataProvider removeChessmanProvider
+     * @dataProvider locationProvider
      */
     public function testRemoveChessmanFromLocationTrue($location)
     {
-        $chessman = $this->getMockBuilder(\Chessboard\AChessman::class)
-            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, $location))
-            ->getMockForAbstractClass();
         $object = new \Chessboard\Chessboard();
         $chessmanList = new \Chessboard\ChessmanList();
-        $chessmanList[] = $chessman;
+        $chessmanList[] = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, $location))
+            ->getMockForAbstractClass();
         $object->setChessmanList($chessmanList);
         $this->assertCount(1, $object->getChessmanList());
         $this->assertTrue($object->removeChessmanFromLocation($location));
@@ -105,7 +104,20 @@ class CheassboardTest extends TestCase
     }
     
     /**
-     * @dataProvider removeChessmanProvider
+     * @dataProvider locationProvider
+     */
+    public function testRemoveChessmanFromLocationFalse($location)
+    {
+        $object = new \Chessboard\Chessboard();
+        $chessmanList = new \Chessboard\ChessmanList();
+        $object->setChessmanList($chessmanList);
+        $this->assertCount(0, $object->getChessmanList());
+        $this->assertFalse($object->removeChessmanFromLocation($location));
+        $this->assertCount(0, $object->getChessmanList());
+    }
+    
+    /**
+     * @dataProvider locationProvider
      */
     public function testRemoveChessman($location)
     {
@@ -119,6 +131,60 @@ class CheassboardTest extends TestCase
         $this->assertCount(1, $object->getChessmanList());
         $this->assertTrue($object->removeChessman($chessman));
         $this->assertCount(0, $object->getChessmanList());
+    }
+    
+    /**
+     * @dataProvider locationProvider
+     */
+    public function testFindChessmanOnLocation($location)
+    {
+        $object = new \Chessboard\Chessboard();
+        $chessmanList = new \Chessboard\ChessmanList();
+        $chessmanList[] = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, $location))
+            ->getMockForAbstractClass();
+        $object->setChessmanList($chessmanList);
+        $this->assertCount(1, $object->getChessmanList());
+        $chessman = $object->findChessmanOnLocation($location);
+        $this->assertSame($location, $chessman->getCurrentLocation());
+    }
+    
+    /**
+     * @dataProvider locationProvider
+     */
+    public function testFindEnemyChessmanOnLocation($location)
+    {
+        $object = new \Chessboard\Chessboard();
+        $chessmanList = new \Chessboard\ChessmanList();
+        $chessmanList[] = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, $location))
+            ->getMockForAbstractClass();
+        $object->setChessmanList($chessmanList);
+        $this->assertCount(1, $object->getChessmanList());
+        $chessman = $object->findEnemyChessmanOnLocation($this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_BLACK, array()))
+            ->getMockForAbstractClass(), $location);
+        $this->assertSame($location, $chessman->getCurrentLocation());
+        $this->assertSame(\Chessboard\AChessman::COLOUR_WHITE, $chessman->getColour());
+    }
+    
+    /**
+     * @dataProvider locationProvider
+     */
+    public function testFindFriendlyChessmanOnLocation($location)
+    {
+        $object = new \Chessboard\Chessboard();
+        $chessmanList = new \Chessboard\ChessmanList();
+        $chessmanList[] = $this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, $location))
+            ->getMockForAbstractClass();
+        $object->setChessmanList($chessmanList);
+        $this->assertCount(1, $object->getChessmanList());
+        $chessman = $object->findFriendlyChessmanOnLocation($this->getMockBuilder(\Chessboard\AChessman::class)
+            ->setConstructorArgs(array(\Chessboard\AChessman::COLOUR_WHITE, array()))
+            ->getMockForAbstractClass(), $location);
+        $this->assertSame($location, $chessman->getCurrentLocation());
+        $this->assertSame(\Chessboard\AChessman::COLOUR_WHITE, $chessman->getColour());
     }
     
 }
