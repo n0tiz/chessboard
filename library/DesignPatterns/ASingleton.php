@@ -20,11 +20,6 @@ abstract class ASingleton
         throw new Exception("Cannot clone a Singleton");
     }
 
-    final public function __wakeup()
-    {
-        throw new Exception("Cannot wakeup a Singleton");
-    }
-
     final public function __sleep()
     {
         throw new Exception("Cannot sleep a Singleton");
