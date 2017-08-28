@@ -188,32 +188,60 @@ class Chessboard
     public function getPossiblePathsForChessmanOnLocation(array $location)
     {
         $chessman = $this->findChessmanOnLocation($location);
+        $possiblePaths = $chessman->getPossiblePaths();
         if ($chessman instanceof Pawn) {
-            $possibleForwardPaths = $chessman->getPossiblePaths();
-            // remove friendly collisions from forward paths
-            $possibleForwardPaths = $this->removeFriendlyCollisionsFromPossiblePaths($chessman, $possibleForwardPaths);
             // we need to remove any enemy collisions, but on the same way as we remove friendly collisions
-            $possibleForwardPaths = $this->removeFriendlyCollisionsFromPossiblePaths(
-                    new Pawn($chessman->getOppositeColour(), $chessman->getCurrentLocation()), $possibleForwardPaths
+            $possiblePaths = $this->removeFriendlyCollisionsFromPossiblePaths(
+                    new Pawn($chessman->getOppositeColour(), $chessman->getCurrentLocation()), $possiblePaths
             );
-            // now we have forward movement paths which do not collide with anyone
-            $possibleAttackPaths = $chessman->getPossibleAttackPaths();
-            // ensure attack paths actually attack an enemy
-            foreach ($possibleAttackPaths as $index => $possibleAttackPath) {
-                $possibleStep = end($possibleAttackPath);
-                $enemyChessman = $this->findEnemyChessmanOnLocation($chessman, $possibleStep);
-                if (is_null($enemyChessman)) {
-                    unset($possibleAttackPaths[$index]);
-                }
-            }
-            $possiblePaths = array_merge($possibleForwardPaths, $possibleAttackPaths);
         } else {
-            $possiblePaths = $chessman->getPossiblePaths();
             $possiblePaths = $this->removeEnemyCollisionsFromPossiblePaths($chessman, $possiblePaths);
-            $possiblePaths = $this->removeFriendlyCollisionsFromPossiblePaths($chessman, $possiblePaths);
-            $possiblePaths = $this->removeEmptyPaths($chessman, $possiblePaths);
         }
+        $possiblePaths = $this->removeFriendlyCollisionsFromPossiblePaths($chessman, $possiblePaths);
+        $possiblePaths = $this->removeEmptyPaths($chessman, $possiblePaths);
         return $possiblePaths;
+    }
+
+    /**
+     * 
+     * @param AChessman $chessman
+     * @return array
+     */
+    public function getPossiblePathsForChessman(AChessman $chessman)
+    {
+        return $this->getPossiblePathsForChessmanOnLocation($chessman->getCurrentLocation());
+    }
+
+    /**
+     * 
+     * @param array $location
+     * @return array
+     */
+    public function getPossibleAttackPathsForChessmanOnLocation(array $location)
+    {
+        $chessman = $this->findChessmanOnLocation($location);
+        $possibleAttackPaths = $chessman->getPossibleAttackPaths();
+        if ($chessman instanceof Pawn) {
+            // we need to remove any enemy collisions, but on the same way as we remove friendly collisions
+            $possibleAttackPaths = $this->removeFriendlyCollisionsFromPossiblePaths(
+                    new Pawn($chessman->getOppositeColour(), $chessman->getCurrentLocation()), $possibleAttackPaths
+            );
+        } else {
+            $possibleAttackPaths = $this->removeEnemyCollisionsFromPossiblePaths($chessman, $possibleAttackPaths);
+        }
+        $possibleAttackPaths = $this->removeFriendlyCollisionsFromPossiblePaths($chessman, $possibleAttackPaths);
+        $possibleAttackPaths = $this->removeEmptyPaths($chessman, $possibleAttackPaths);
+        return $possibleAttackPaths;
+    }
+
+    /**
+     * 
+     * @param AChessman $chessman
+     * @return array
+     */
+    public function getPossibleAttackPathsForChessman(AChessman $chessman)
+    {
+        return $this->getPossibleAttackPathsForChessmanOnLocation($chessman->getCurrentLocation());
     }
 
     /**
@@ -237,9 +265,25 @@ class Chessboard
      * @param AChessman $chessman
      * @return array
      */
-    public function getPossiblePathsForChessman(AChessman $chessman)
+    public function getPossibleMovesForChessman(AChessman $chessman)
     {
-        return $this->getPossiblePathsForChessmanOnLocation($chessman->getCurrentLocation());
+        return $this->getPossibleMovesForChessmanOnLocation($chessman->getCurrentLocation());
+    }
+
+    /**
+     * 
+     * @param array $location
+     * @return array
+     */
+    public function getPossibleAttackMovesForChessmanOnLocation(array $location)
+    {
+        $possibleAttackPaths = $this->getPossibleAttackPathsForChessmanOnLocation($location);
+        $possibleAttackMoves = array();
+        foreach ($possibleAttackPaths as $possibleAttackPath) {
+            array_shift($possibleAttackPath);
+            $possibleAttackMoves = array_merge($possibleAttackMoves, $possibleAttackPath);
+        }
+        return $possibleAttackMoves;
     }
 
     /**
@@ -247,9 +291,9 @@ class Chessboard
      * @param AChessman $chessman
      * @return array
      */
-    public function getPossibleMovesForChessman(AChessman $chessman)
+    public function getPossibleAttackMovesForChessman(AChessman $chessman)
     {
-        return $this->getPossibleMovesForChessmanOnLocation($chessman->getCurrentLocation());
+        return $this->getPossibleAttackMovesForChessmanOnLocation($chessman->getCurrentLocation());
     }
 
     /**
@@ -263,12 +307,17 @@ class Chessboard
         if (is_null($chessman)) {
             throw new Exception("No chessman found on location " . json_encode($fromLocation));
         }
-        if (!in_array($toLocation, $this->getPossibleMovesForChessman($chessman))) {
+        $allPossibleMoves = array_merge($this->getPossibleMovesForChessman($chessman), $this->getPossibleAttackMovesForChessman($chessman));
+        if (!in_array($toLocation, $allPossibleMoves)) {
             throw new Exception("Move from " . json_encode($fromLocation) . " to " . json_encode($toLocation) . " not allowed for " . $chessman->getChessmanName());
         }
         $enemyChessman = $this->findEnemyChessmanOnLocation($chessman, $toLocation);
         if (!is_null($enemyChessman)) {
             // enemy found on destination
+            if (!in_array($toLocation, $this->getPossibleAttackMovesForChessman($chessman))) {
+                // not an attack move, but destination is enemy
+                throw new Exception("Move from " . json_encode($fromLocation) . " to " . json_encode($toLocation) . " is attemted attack move, however, this attack move is not allowed for " . $chessman->getChessmanName());
+            }
             // remove the enemy chessman
             $this->removeChessman($enemyChessman);
         }
