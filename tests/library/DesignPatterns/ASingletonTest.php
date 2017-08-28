@@ -9,7 +9,7 @@ use \PHPUnit\Framework\TestCase;
  */
 class ASingletonTest extends TestCase
 {
-    
+
     /**
      * @expectedException \Exception
      * @expectedExceptionMessage Cannot clone a Singleton
@@ -17,11 +17,11 @@ class ASingletonTest extends TestCase
     public function testClone()
     {
         $object = $this->getMockBuilder(\DesignPatterns\ASingleton::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+                ->disableOriginalConstructor()
+                ->getMockForAbstractClass();
         clone($object);
     }
-    
+
     /**
      * @expectedException \Exception
      * @expectedExceptionMessage Cannot sleep a Singleton
@@ -29,9 +29,9 @@ class ASingletonTest extends TestCase
     public function testSleep()
     {
         $object = $this->getMockBuilder(\DesignPatterns\ASingleton::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+                ->disableOriginalConstructor()
+                ->getMockForAbstractClass();
         serialize($object);
     }
-    
+
 }

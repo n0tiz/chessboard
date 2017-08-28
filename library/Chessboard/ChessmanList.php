@@ -18,4 +18,5 @@ class ChessmanList implements Iterator, Countable, ArrayAccess
     use TIterator,
         TCountable,
         TArrayAccess;
+
 }

@@ -9,6 +9,7 @@ use tests\Chessboard\AChessmanTest;
  */
 class PawnTest extends AChessmanTest
 {
+
     public function testGetChessmanName()
     {
         $object = new \Chessboard\Chessman\Pawn(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
@@ -139,9 +140,9 @@ class PawnTest extends AChessmanTest
     public function testGetPossiblePaths($location, $colour, $firstMove, $expectedResult)
     {
         $object = $this->getMockBuilder(\Chessboard\Chessman\Pawn::class)
-            ->setConstructorArgs(array($colour, $location))
-            ->setMethods(array("isFirstMove"))
-            ->getMock();
+                ->setConstructorArgs(array($colour, $location))
+                ->setMethods(array("isFirstMove"))
+                ->getMock();
         $object->method("isFirstMove")->will($this->returnValue($firstMove));
         $this->assertSame($expectedResult, $object->getPossiblePaths());
     }
@@ -270,10 +271,11 @@ class PawnTest extends AChessmanTest
     public function testGetPossibleMoves($location, $colour, $firstMove, $expectedResult)
     {
         $object = $this->getMockBuilder(\Chessboard\Chessman\Pawn::class)
-            ->setConstructorArgs(array($colour, $location))
-            ->setMethods(array("isFirstMove"))
-            ->getMock();
+                ->setConstructorArgs(array($colour, $location))
+                ->setMethods(array("isFirstMove"))
+                ->getMock();
         $object->method("isFirstMove")->will($this->returnValue($firstMove));
         $this->assertSame($expectedResult, $object->getPossibleMoves());
     }
+
 }

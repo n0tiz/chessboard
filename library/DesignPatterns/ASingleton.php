@@ -33,4 +33,5 @@ abstract class ASingleton
         }
         return $instance;
     }
+
 }

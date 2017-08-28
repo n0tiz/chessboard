@@ -46,4 +46,5 @@ class Knight extends AChessman
         }
         return $possiblePaths;
     }
+
 }

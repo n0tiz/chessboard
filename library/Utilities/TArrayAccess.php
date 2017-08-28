@@ -41,4 +41,5 @@ trait TArrayAccess
     {
         unset($this->array[$offset]);
     }
+
 }

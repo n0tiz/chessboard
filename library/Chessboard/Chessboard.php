@@ -13,8 +13,8 @@ use \Exception;
 class Chessboard
 {
 
-    public $files = array("a", "b", "c", "d", "e", "f", "g", "h");
-    public $ranks = array("1", "2", "3", "4", "5", "6", "7", "8");
+    protected $files = array("a", "b", "c", "d", "e", "f", "g", "h");
+    protected $ranks = array("1", "2", "3", "4", "5", "6", "7", "8");
 
     /**
      * @var ChessmanList
@@ -194,7 +194,7 @@ class Chessboard
             $possibleForwardPaths = $this->removeFriendlyCollisionsFromPossiblePaths($chessman, $possibleForwardPaths);
             // we need to remove any enemy collisions, but on the same way as we remove friendly collisions
             $possibleForwardPaths = $this->removeFriendlyCollisionsFromPossiblePaths(
-                new Pawn($chessman->getOppositeColour(), $chessman->getCurrentLocation()), $possibleForwardPaths
+                    new Pawn($chessman->getOppositeColour(), $chessman->getCurrentLocation()), $possibleForwardPaths
             );
             // now we have forward movement paths which do not collide with anyone
             $possibleAttackPaths = $chessman->getPossibleAttackPaths();
@@ -294,4 +294,5 @@ class Chessboard
         $return .= implode("|", $this->files) . PHP_EOL;
         return $return;
     }
+
 }

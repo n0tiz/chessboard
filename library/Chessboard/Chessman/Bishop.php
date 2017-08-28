@@ -28,4 +28,5 @@ class Bishop extends AChessman
         $possiblePaths = $this->getDiagonalPaths();
         return $possiblePaths;
     }
+
 }

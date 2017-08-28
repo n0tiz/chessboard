@@ -30,4 +30,5 @@ class Rook extends AChessman
         $possiblePaths = array_merge($horizontalPaths, $verticalPaths);
         return $possiblePaths;
     }
+
 }

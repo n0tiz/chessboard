@@ -263,4 +263,5 @@ abstract class AChessman implements IChessman
         $possiblePaths[] = $verticalPath;
         return $possiblePaths;
     }
+
 }

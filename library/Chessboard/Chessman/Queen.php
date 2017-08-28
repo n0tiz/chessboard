@@ -32,4 +32,5 @@ class Queen extends AChessman
         $possiblePaths = array_merge($bishop->getPossiblePaths(), $rook->getPossiblePaths());
         return $possiblePaths;
     }
+
 }

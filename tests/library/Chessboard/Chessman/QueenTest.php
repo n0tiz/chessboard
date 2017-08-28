@@ -9,6 +9,7 @@ use tests\Chessboard\AChessmanTest;
  */
 class QueenTest extends AChessmanTest
 {
+
     public function testGetChessmanName()
     {
         $object = new \Chessboard\Chessman\Queen(\Chessboard\AChessman::COLOUR_WHITE, array("h", "2"));
@@ -181,4 +182,5 @@ class QueenTest extends AChessmanTest
         $object = new \Chessboard\Chessman\Bishop(\Chessboard\AChessman::COLOUR_WHITE, $location);
         $this->assertSame($expectedResult, $object->getPossibleAttackMoves());
     }
+
 }

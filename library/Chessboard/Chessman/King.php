@@ -32,4 +32,5 @@ class King extends AChessman
         }
         return $possiblePaths;
     }
+
 }

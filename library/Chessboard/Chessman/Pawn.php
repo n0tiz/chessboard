@@ -89,4 +89,5 @@ class Pawn extends AChessman
         }
         return $possibleAttackMoves;
     }
+
 }

@@ -14,4 +14,5 @@ trait TCountable
     {
         return count($this->array);
     }
+
 }

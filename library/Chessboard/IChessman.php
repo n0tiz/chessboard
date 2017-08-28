@@ -13,4 +13,5 @@ interface IChessman
      * @return array
      */
     public function getPossiblePaths();
+
 }

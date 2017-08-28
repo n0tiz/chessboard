@@ -1,4 +1,5 @@
 <?php
+
 $files = array(
     '/../library/DesignPatterns/ASingleton.php',
     '/../library/Utilities/TIterator.php',
