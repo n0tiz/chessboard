@@ -80,11 +80,14 @@ $chessboard->setChessmanList($chessmanList);
 //$chessboard->getPossiblePathsForChessman($chessman);
 //$chessboard->getPossiblePathsForChessmanOnLocation(array("a", "7"));
 //$chessboard->getPossibleMovesForChessman($chessman);
-$possibleMoves = $chessboard->getPossibleMovesForChessmanOnLocation(array("h", "2"));
-try {
-    $chessboard->moveChessmanFromLocationToLocation(array("h", "2"), array("h", "4"));
-} catch (\Exception $e) {
-    var_dump($e->getMessage());
-}
+/* $possibleMoves = $chessboard->getPossibleMovesForChessmanOnLocation(array("h", "2"));
+  try {
+  $chessboard->moveChessmanFromLocationToLocation(array("h", "2"), array("h", "4"));
+  } catch (\Exception $e) {
+  var_dump($e->getMessage());
+  } */
 //$chessboard->moveChessmanFromLocationToLocation(array("a", "6"), array("a", "4"));
-echo (string) $chessboard;
+//echo (string) $chessboard;
+$chessman = $chessboard->findChessmanOnLocation(array("e", "7"));
+var_dump($chessman->getPossibleMoves());
+var_dump($chessman->getPossibleAttackMoves());

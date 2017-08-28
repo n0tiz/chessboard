@@ -176,6 +176,15 @@ abstract class AChessman implements IChessman
     }
 
     /**
+     * Calculate the possible attack paths this chessman can move via.
+     * @return array
+     */
+    public function getPossibleAttackPaths()
+    {
+        return $this->getPossiblePaths();
+    }
+
+    /**
      * Retrieve the path a chessman needs to follow to get from $from to $to.
      * Location $from is required to be the current location of the chessman.
      * @param array $from
