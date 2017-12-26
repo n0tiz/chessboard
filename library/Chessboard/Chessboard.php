@@ -22,6 +22,22 @@ class Chessboard
     protected $chessmanList;
 
     /**
+     * @return array
+     */
+    function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @return array
+     */
+    function getRanks()
+    {
+        return $this->ranks;
+    }
+
+    /**
      * @return ChessmanList
      */
     public function getChessmanList()

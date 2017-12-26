@@ -1,28 +1,8 @@
 <?php
 
-$files = array(
-    '/../library/DesignPatterns/ASingleton.php',
-    '/../library/Utilities/TIterator.php',
-    '/../library/Utilities/TArrayAccess.php',
-    '/../library/Utilities/TCountable.php',
-    '/../library/Chessboard/IChessman.php',
-    '/../library/Chessboard/ChessmanList.php',
-    '/../library/Chessboard/Chessboard.php',
-    '/../library/Chessboard/AChessman.php',
-    '/../library/Chessboard/Chessman/Bishop.php',
-    '/../library/Chessboard/Chessman/King.php',
-    '/../library/Chessboard/Chessman/Knight.php',
-    '/../library/Chessboard/Chessman/Pawn.php',
-    '/../library/Chessboard/Chessman/Queen.php',
-    '/../library/Chessboard/Chessman/Rook.php',
-);
-
-foreach ($files as $file) {
-    if ("WIN" === strtoupper(substr(PHP_OS, 0, 3))) {
-        $file = str_replace('/', '\\', $file);
-    }
-    require_once(__DIR__ . $file);
-}
+require_once(getcwd() . '/../library/Utilities/Autoloader.php');
+$autoloader = new Utilities\Autoloader();
+$autoloader->register();
 
 // columns are called files (a - h, a on the left side, h on the right side)
 // rows are called ranks (8 - 1, 8 is where black starts, 1 is where white starts)
@@ -67,6 +47,7 @@ $chessmanList[] = new \Chessboard\Chessman\Rook(\Chessboard\AChessman::COLOUR_WH
 
 $chessboard = new \Chessboard\Chessboard();
 $chessboard->setChessmanList($chessmanList);
+var_dump(serialize($chessboard));
 
 //$chessboard->findChessmanOnLocation(array("a", "2"));
 //count($chessboard->getChessmanList());
@@ -89,7 +70,7 @@ $chessboard->setChessmanList($chessmanList);
 //$chessboard->moveChessmanFromLocationToLocation(array("a", "6"), array("a", "4"));
 //echo (string) $chessboard;
 $chessman = $chessboard->findChessmanOnLocation(array("e", "7"));
-var_dump($chessboard->getPossibleAttackMovesForChessman($chessman));
-var_dump($chessboard->getPossibleAttackPathsForChessman($chessman));
-var_dump($chessboard->getPossibleMovesForChessman($chessman));
-var_dump($chessboard->getPossiblePathsForChessman($chessman));
+//var_dump($chessboard->getPossibleAttackMovesForChessman($chessman));
+//var_dump($chessboard->getPossibleAttackPathsForChessman($chessman));
+//var_dump($chessboard->getPossibleMovesForChessman($chessman));
+//var_dump($chessboard->getPossiblePathsForChessman($chessman));
