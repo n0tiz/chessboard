@@ -19,36 +19,32 @@ if (!isset($_SESSION['chessgame']) || is_null($_SESSION['chessgame'])) {
 
 $chessgame = unserialize($_SESSION['chessgame']);
 
-$c = 0;
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <link href="css/chessboard.css" rel="stylesheet" type="text/css" />
+        <script>
+        </script>
     </head>
     <body>
         <table>
-            <tr><td></td><td><?= implode("</td><td>", $chessgame->getChessboard()->getFiles()) ?></td><td></td></tr>
+            <tr><th></th><th><?= implode("</th><th>", $chessgame->getChessboard()->getFiles()) ?></th><th></th></tr>
             <?php foreach (array_reverse($chessgame->getChessboard()->getRanks()) as $i => $rank): ?>
                 <tr>
-                    <td><?= $rank ?></td>
+                    <th><?= $rank ?></th>
                     <?php foreach ($chessgame->getChessboard()->getFiles() as $file): ?>
                         <?php $chessman = $chessgame->getChessboard()->findChessmanOnLocation(array($file, $rank)); ?>
-                        <?php $c ++; ?>
-                        <?php $class = "dark"; ?>
-                        <?php if ($c % 2 !== $i % 2): ?>
-                            <?php $class = "light"; ?>
-                        <?php endif; ?> 
                         <?php if (is_null($chessman)): ?>
-                            <td class="<?= $class ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
+                            <td data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
                         <?php else: ?>
-                            <td class="<?= $class ?> <?= strtolower($chessman->getColour()) ?> <?= strtolower($chessman->getChessmanName()) ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
+                            <td class="<?= strtolower($chessman->getColour()) ?> <?= strtolower($chessman->getChessmanName()) ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
                         <?php endif; ?>
                     <?php endforeach; ?>
-                    <td><?= $rank ?></td>
+                    <th><?= $rank ?></th>
                 </tr>
             <?php endforeach; ?>
-            <tr><td></td><td><?= implode("</td><td>", $chessgame->getChessboard()->getFiles()) ?></td><td></td></tr>
+            <tr><th></th><th><?= implode("</th><th>", $chessgame->getChessboard()->getFiles()) ?></th><th></th></tr>
         </table>
     </body>
 </html>

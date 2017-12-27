@@ -1,11 +1,22 @@
-td {
+td, th {
     height: 50px;
     width: 50px;
     text-align: center;
+    font-weight: normal;
 }
 
-td.light {
+tr:nth-child(odd) td:nth-child(odd),
+tr:nth-child(even) td:nth-child(even) {
     background-color: burlywood;
+}
+
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+    background-color: saddlebrown;
+}
+
+th {
+    background-color: white;
 }
 
 td.black.rook {
@@ -34,10 +45,6 @@ td.black.queen {
 
 td.black.rook {
     background-image: url("../images/rook.black.png");
-}
-
-td.dark {
-    background-color: saddlebrown;
 }
 
 td.white.rook {
