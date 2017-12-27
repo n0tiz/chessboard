@@ -9,31 +9,31 @@ td.light {
 }
 
 td.black.rook {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/rook.black.png");
+    background-image: url("../images/rook.black.png");
 }
 
 td.black.bishop {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/bishop.black.png");
+    background-image: url("../images/bishop.black.png");
 }
 
 td.black.king {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/king.black.png");
+    background-image: url("../images/king.black.png");
 }
 
 td.black.knight {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/knight.black.png");
+    background-image: url("../images/knight.black.png");
 }
 
 td.black.pawn {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/pawn.black.png");
+    background-image: url("../images/pawn.black.png");
 }
 
 td.black.queen {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/queen.black.png");
+    background-image: url("../images/queen.black.png");
 }
 
 td.black.rook {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/rook.black.png");
+    background-image: url("../images/rook.black.png");
 }
 
 td.dark {
@@ -41,29 +41,29 @@ td.dark {
 }
 
 td.white.rook {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/rook.white.png");
+    background-image: url("../images/rook.white.png");
 }
 
 td.white.bishop {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/bishop.white.png");
+    background-image: url("../images/bishop.white.png");
 }
 
 td.white.king {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/king.white.png");
+    background-image: url("../images/king.white.png");
 }
 
 td.white.knight {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/knight.white.png");
+    background-image: url("../images/knight.white.png");
 }
 
 td.white.pawn {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/pawn.white.png");
+    background-image: url("../images/pawn.white.png");
 }
 
 td.white.queen {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/queen.white.png");
+    background-image: url("../images/queen.white.png");
 }
 
 td.white.rook {
-    background-image: url("http://test.verzele.home/~patrick/chessboard/public/images/rook.white.png");
+    background-image: url("../images/rook.white.png");
 }
