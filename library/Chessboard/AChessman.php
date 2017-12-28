@@ -60,7 +60,7 @@ abstract class AChessman implements IChessman
     {
         return $this->icons[$this->getColour()];
     }
-    
+
     /**
      * Retrieve the HTML representation of this chessman.
      * @return string

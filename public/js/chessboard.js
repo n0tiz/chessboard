@@ -28,8 +28,8 @@ function mouseup(event) {
 
 ready(function () {
     /*var elements = document.getElementsByTagName('div');
-    for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        element.addEventListener('mousedown', mousedown, false);
-    }*/
+     for (var i = 0; i < elements.length; i++) {
+     var element = elements[i];
+     element.addEventListener('mousedown', mousedown, false);
+     }*/
 });

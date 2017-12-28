@@ -20,7 +20,6 @@ if (!isset($_SESSION['chessgame']) || is_null($_SESSION['chessgame'])) {
 }
 
 $chessgame = unserialize($_SESSION['chessgame']);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,23 +28,19 @@ $chessgame = unserialize($_SESSION['chessgame']);
         <script src="js/chessboard.js"></script>
     </head>
     <body>
-        <table>
-            <tr><th></th><th><?= implode("</th><th>", $chessgame->getChessboard()->getFiles()) ?></th><th></th></tr>
-            <?php foreach (array_reverse($chessgame->getChessboard()->getRanks()) as $i => $rank): ?>
-                <tr>
-                    <th><?= $rank ?></th>
-                    <?php foreach ($chessgame->getChessboard()->getFiles() as $file): ?>
-                        <?php $chessman = $chessgame->getChessboard()->findChessmanOnLocation(array($file, $rank)); ?>
-                        <?php if (is_null($chessman)): ?>
-                            <td data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
-                        <?php else: ?>
-                            <td data-chessman="<?= strtolower($chessman->getChessmanName()) ?>" data-colour="<?= strtolower($chessman->getColour()) ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"><div><?= $chessman->getHtml() ?></div></td>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                    <th><?= $rank ?></th>
-                </tr>
+        <div class="chessboard">
+            <div class="spacer"></div><div class="file"><?= implode('</div><div class="file">', $chessgame->getChessboard()->getFiles()) ?></div><div class="spacer"></div>
+            <div class="clear"></div>
+            <?php foreach (array_reverse($chessgame->getChessboard()->getRanks()) as $rank): ?>
+                <div class="rank"><?= $rank ?></div>
+                <?php foreach ($chessgame->getChessboard()->getFiles() as $file): ?>
+                    <?php $chessman = $chessgame->getChessboard()->findChessmanOnLocation(array($file, $rank)); ?>
+                    <div class="chessman"><?php if (!is_null($chessman)): ?><?= $chessman->getHtml() ?><?php endif; ?></div>
+                <?php endforeach; ?>
+                <div class="rank"><?= $rank ?></div>
+                <div class="clear"></div>
             <?php endforeach; ?>
-            <tr><th></th><th><?= implode("</th><th>", $chessgame->getChessboard()->getFiles()) ?></th><th></th></tr>
-        </table>
+            <div class="spacer"></div><div class="file"><?= implode('</div><div class="file">', $chessgame->getChessboard()->getFiles()) ?></div><div class="spacer"></div>
+        </div>
     </body>
 </html>
