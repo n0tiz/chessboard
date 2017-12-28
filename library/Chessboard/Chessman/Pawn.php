@@ -18,6 +18,8 @@ class Pawn extends AChessman
         $this->valuation = 3;
         $this->icons[AChessman::COLOUR_WHITE] = "p";
         $this->icons[AChessman::COLOUR_BLACK] = "P";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9817;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9823;";
     }
 
     /**

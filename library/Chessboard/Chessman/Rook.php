@@ -16,6 +16,8 @@ class Rook extends AChessman
         $this->valuation = 5;
         $this->icons[AChessman::COLOUR_WHITE] = "r";
         $this->icons[AChessman::COLOUR_BLACK] = "R";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9814;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9820;";
     }
 
     /**

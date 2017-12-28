@@ -18,6 +18,8 @@ class Queen extends AChessman
         $this->valuation = 9;
         $this->icons[AChessman::COLOUR_WHITE] = "q";
         $this->icons[AChessman::COLOUR_BLACK] = "Q";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9813;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9819;";
     }
 
     /**

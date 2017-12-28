@@ -15,6 +15,10 @@ abstract class AChessman implements IChessman
 
     protected $files = array("a", "b", "c", "d", "e", "f", "g", "h");
     protected $ranks = array("1", "2", "3", "4", "5", "6", "7", "8");
+    protected $html = array(
+        AChessman::COLOUR_WHITE => "",
+        AChessman::COLOUR_BLACK => "",
+    );
     protected $colour = "";
     protected $currentLocation = "";
     protected $previousLocations = array();
@@ -55,6 +59,15 @@ abstract class AChessman implements IChessman
     public function getIcon()
     {
         return $this->icons[$this->getColour()];
+    }
+    
+    /**
+     * Retrieve the HTML representation of this chessman.
+     * @return string
+     */
+    public function getHtml()
+    {
+        return $this->html[$this->getColour()];
     }
 
     /**

@@ -17,6 +17,8 @@ class King extends AChessman
         $this->valuation = 0;
         $this->icons[AChessman::COLOUR_WHITE] = "k";
         $this->icons[AChessman::COLOUR_BLACK] = "K";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9812;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9818;";
     }
 
     /**

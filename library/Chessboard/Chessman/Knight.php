@@ -16,6 +16,8 @@ class Knight extends AChessman
         $this->valuation = 3;
         $this->icons[AChessman::COLOUR_WHITE] = "n";
         $this->icons[AChessman::COLOUR_BLACK] = "N";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9816;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9822;";
     }
 
     /**

@@ -16,6 +16,8 @@ class Bishop extends AChessman
         $this->valuation = 3;
         $this->icons[AChessman::COLOUR_WHITE] = "b";
         $this->icons[AChessman::COLOUR_BLACK] = "B";
+        $this->html[AChessman::COLOUR_WHITE] = "&#9815;";
+        $this->html[AChessman::COLOUR_BLACK] = "&#9821;";
     }
 
     /**

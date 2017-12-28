@@ -1,8 +1,18 @@
-td, th {
+* {
+    cursor: default;
+}
+
+td, th, div {
     height: 50px;
     width: 50px;
     text-align: center;
     font-weight: normal;
+    margin: 0px;
+    padding: 0px;
+}
+
+div {
+    font-size: 38px;
 }
 
 tr:nth-child(odd) td:nth-child(odd),
@@ -13,64 +23,4 @@ tr:nth-child(even) td:nth-child(even) {
 tr:nth-child(odd) td:nth-child(even),
 tr:nth-child(even) td:nth-child(odd) {
     background-color: saddlebrown;
-}
-
-th {
-    background-color: white;
-}
-
-td.black.rook {
-    background-image: url("../images/rook.black.png");
-}
-
-td.black.bishop {
-    background-image: url("../images/bishop.black.png");
-}
-
-td.black.king {
-    background-image: url("../images/king.black.png");
-}
-
-td.black.knight {
-    background-image: url("../images/knight.black.png");
-}
-
-td.black.pawn {
-    background-image: url("../images/pawn.black.png");
-}
-
-td.black.queen {
-    background-image: url("../images/queen.black.png");
-}
-
-td.black.rook {
-    background-image: url("../images/rook.black.png");
-}
-
-td.white.rook {
-    background-image: url("../images/rook.white.png");
-}
-
-td.white.bishop {
-    background-image: url("../images/bishop.white.png");
-}
-
-td.white.king {
-    background-image: url("../images/king.white.png");
-}
-
-td.white.knight {
-    background-image: url("../images/knight.white.png");
-}
-
-td.white.pawn {
-    background-image: url("../images/pawn.white.png");
-}
-
-td.white.queen {
-    background-image: url("../images/queen.white.png");
-}
-
-td.white.rook {
-    background-image: url("../images/rook.white.png");
 }

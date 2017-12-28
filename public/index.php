@@ -5,6 +5,8 @@ $autoloader->register();
 
 session_start();
 
+$_SESSION['chessgame'] = null;
+
 if (!isset($_SESSION['chessgame']) || is_null($_SESSION['chessgame'])) {
     $player1 = new Chessboard\Chessplayer('player', 'one', 'player-one');
     $player2 = new Chessboard\Chessplayer('player', 'two', 'player-two');
@@ -24,8 +26,7 @@ $chessgame = unserialize($_SESSION['chessgame']);
 <html>
     <head>
         <link href="css/chessboard.css" rel="stylesheet" type="text/css" />
-        <script>
-        </script>
+        <script src="js/chessboard.js"></script>
     </head>
     <body>
         <table>
@@ -38,7 +39,7 @@ $chessgame = unserialize($_SESSION['chessgame']);
                         <?php if (is_null($chessman)): ?>
                             <td data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
                         <?php else: ?>
-                            <td class="<?= strtolower($chessman->getColour()) ?> <?= strtolower($chessman->getChessmanName()) ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"></td>
+                            <td data-chessman="<?= strtolower($chessman->getChessmanName()) ?>" data-colour="<?= strtolower($chessman->getColour()) ?>" data-rank="<?= $rank ?>" data-file="<?= $file ?>"><div><?= $chessman->getHtml() ?></div></td>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <th><?= $rank ?></th>
